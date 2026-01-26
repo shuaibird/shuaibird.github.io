@@ -1,0 +1,39 @@
+{
+  "name": "shuaibird-universe",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "lint": "eslint . --ext .js,.ts,.astro && stylelint \"**/*.css\" --allow-empty-input",
+    "lint:fix": "eslint . --ext .js,.ts,.astro --fix && stylelint \"**/*.css\" --fix --allow-empty-input",
+    "check": "npm run format:check && npm run lint",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{astro,js,ts,json,md,css,html}": "prettier --write",
+    "*.{astro,js,ts}": "eslint --fix",
+    "*.css": "stylelint --fix"
+  },
+  "dependencies": {
+    "astro": "^5.16.15"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.53.1",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript-eslint": "^8.53.1"
+  }
+}

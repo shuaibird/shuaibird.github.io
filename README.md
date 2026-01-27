@@ -2,6 +2,8 @@
 
 a universe by shuaibird — thinking, making, moving
 
+🌐 https://shuaibird.github.io/
+
 ## What this site is
 
 This is a personal homepage, not a product landing page. It is a long-term space for ideas, tech notes, life reflections, and projects. It is a lightweight shell that links out to more complex demos when needed.

@@ -1,8 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 ---
 
 <BaseLayout title="About — shuaibird">
-  <h1>About</h1>
-  <p>A quiet place for thinking, making, moving.</p>
+  <PageHero
+    variant="solo"
+    kicker="About"
+    title="About"
+    subtitle="A quiet place for thinking, making, moving."
+  />
 </BaseLayout>

@@ -1,0 +1,44 @@
+---
+const { kicker, title, subtitle, variant = "default" } = Astro.props;
+const wrapperClass = variant === "solo" ? "hero hero--solo" : "hero";
+---
+
+<section class={wrapperClass}>
+  {kicker && <div class="hero__kicker">{kicker}</div>}
+  {title && <h1 class="hero__title">{title}</h1>}
+  {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    gap: 12px;
+    padding: 28px 28px 24px;
+    border-radius: 24px;
+    background: var(--surface-glass);
+    border: 1px solid rgba(31, 31, 31, 0.08);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(12px);
+  }
+
+  .hero--solo {
+    padding: 32px 32px 28px;
+  }
+
+  .hero__kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: clamp(2.3rem, 3vw, 3rem);
+  }
+
+  .hero__subtitle {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+</style>

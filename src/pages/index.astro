@@ -1,8 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionCard from "../components/SectionCard.astro";
+import LinkList from "../components/LinkList.astro";
 ---
 
 <BaseLayout>
-  <h1>shuaibird</h1>
-  <p>a universe by shuaibird — thinking, making, moving</p>
+  <PageHero
+    kicker="Universe"
+    title="shuaibird"
+    subtitle="a universe by shuaibird — thinking, making, moving"
+  />
+
+  <SectionCard title="Explore">
+    <LinkList
+      items={[
+        { href: "/tech/", label: "Tech", meta: "tools, systems, experiments" },
+        { href: "/life/", label: "Life", meta: "movement, music, reflections" },
+        { href: "/about/", label: "About", meta: "the why and how" },
+      ]}
+    />
+  </SectionCard>
 </BaseLayout>

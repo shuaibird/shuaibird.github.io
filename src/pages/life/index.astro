@@ -1,8 +1,31 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionCard from "../../components/SectionCard.astro";
+import LinkList from "../../components/LinkList.astro";
 ---
 
 <BaseLayout title="Life — shuaibird">
-  <h1>Life</h1>
-  <p>Small reflections on moving through the day.</p>
+  <PageHero
+    kicker="Life"
+    title="Life"
+    subtitle="Small reflections on moving through the day."
+  />
+
+  <SectionCard title="Spaces">
+    <LinkList
+      items={[
+        {
+          href: "/life/climbing/",
+          label: "Climbing",
+          meta: "slow progress and clear air",
+        },
+        {
+          href: "/life/music/",
+          label: "Music",
+          meta: "loops, texture, and light",
+        },
+      ]}
+    />
+  </SectionCard>
 </BaseLayout>

@@ -1,8 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionCard from "../../components/SectionCard.astro";
+import LinkList from "../../components/LinkList.astro";
 ---
 
 <BaseLayout title="Tech — shuaibird">
-  <h1>Tech</h1>
-  <p>Notes on tools, systems, and quiet experiments.</p>
+  <PageHero
+    kicker="Tech"
+    title="Tech"
+    subtitle="Notes on tools, systems, and quiet experiments."
+  />
+
+  <SectionCard title="Series">
+    <LinkList
+      items={[
+        {
+          href: "/tech/every-bit-of-ai/",
+          label: "Every Bit of AI",
+          meta: "small, steady notes",
+        },
+      ]}
+    />
+  </SectionCard>
 </BaseLayout>

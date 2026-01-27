@@ -1,0 +1,29 @@
+---
+const { title } = Astro.props;
+---
+
+<section class="section-card">
+  {title && <h2 class="section-title">{title}</h2>}
+  <div class="section-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section-card {
+    margin-top: 32px;
+    padding: 22px 24px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.86);
+    border: 1px solid rgba(31, 31, 31, 0.08);
+    box-shadow: 0 10px 24px rgba(17, 17, 17, 0.08);
+  }
+
+  .section-title {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--color-text-muted);
+  }
+</style>

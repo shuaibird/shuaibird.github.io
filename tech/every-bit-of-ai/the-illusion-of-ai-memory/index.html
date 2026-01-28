@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>The Illusion of AI Memory — Every Bit of AI</title><link rel="stylesheet" href="/_astro/index.DfnIsTN7.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-body[data-astro-cid-rd3rumq7] p{margin:0 0 1.1rem}.post-body[data-astro-cid-rd3rumq7] h2{margin-top:1.6rem}.post-body[data-astro-cid-rd3rumq7] blockquote{margin:1.2rem 0;padding:12px 18px;border-left:3px solid var(--color-accent);border-radius:12px;background:var(--surface-glass);color:var(--color-text)}.post-body[data-astro-cid-rd3rumq7] blockquote p{margin:.4rem 0}.post-body[data-astro-cid-rd3rumq7] blockquote p:first-child{margin-top:0}.post-body[data-astro-cid-rd3rumq7] blockquote p:last-child{margin-bottom:0}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" class="active" data-astro-cid-ctg3m53h>Every Bit of AI</a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Jan 28, 2026</div> <h1 class="hero__title" data-astro-cid-s5hxusys>The Illusion of AI Memory</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>Why large language models feel like they remember — and why they actually don’t.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k>  <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-body" data-astro-cid-rd3rumq7> <h2 id="the-illusion">The Illusion</h2>
+<p>When talking to an AI, it often feels like it has memory.</p>
+<p>You tell it your name.<br>
+A few messages later, you ask:</p>
+<blockquote>
+<p>“What’s my name?”</p>
+</blockquote>
+<p>And it answers correctly.</p>
+<p>It <em>feels</em> like memory — but it isn’t.</p>
+<hr>
+<h2 id="the-reality">The Reality</h2>
+<p>Every call to a large language model is <strong>completely stateless</strong>.</p>
+<p>That means:</p>
+<ul>
+<li>The model does <strong>not</strong> remember past conversations</li>
+<li>It does <strong>not</strong> store information about you</li>
+<li>It has <strong>no awareness</strong> of what was said previously</li>
+</ul>
+<p>Each request starts from zero.</p>
+<p>So how does it keep context?</p>
+<hr>
+<h2 id="the-trick">The Trick</h2>
+<p>The trick is simple — and a little deceptive.</p>
+<p><strong>We send the entire conversation again, every time.</strong></p>
+<p>What the model sees is not “the current message”, but a sequence like this:</p>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#A9B1D6">messages </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span><span style="color:#A9B1D6"> role</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">system</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> content</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">You are a helpful assistant.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> },</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span><span style="color:#A9B1D6"> role</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">user</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> content</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Hi! I'm shuaibird.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> },</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span><span style="color:#A9B1D6"> role</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">assistant</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> content</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Nice to meet you, shuaibird.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> },</span></span>
+<span class="line"><span style="color:#89DDFF">  {</span><span style="color:#A9B1D6"> role</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">user</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> content</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">What's my name?</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF"> }</span></span>
+<span class="line"><span style="color:#89DDFF">]</span></span></code></pre>
+<p>From the model’s perspective, this is just <strong>one long piece of text</strong>.</p>
+<hr>
+<h2 id="why-it-works">Why It Works</h2>
+<p>An LLM doesn’t <em>remember</em> — it <strong>predicts</strong>.</p>
+<p>It predicts the most likely next tokens based on the input sequence.</p>
+<p>So if the sequence contains:</p>
+<blockquote>
+<p>“My name is shuaibird”<br>
+…<br>
+“What’s my name?”</p>
+</blockquote>
+<p>Then the most likely answer is simply:</p>
+<blockquote>
+<p><strong>shuaibird</strong></p>
+</blockquote>
+<p>No memory.<br>
+No state.<br>
+Just probability.</p>
+<hr>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p>Understanding this changes how you think about AI:</p>
+<ul>
+<li>“Memory” is an <strong>interface illusion</strong></li>
+<li>Context lives in <strong>your prompt</strong>, not in the model</li>
+<li>Long conversations work because we keep replaying the past</li>
+</ul>
+<p>Once you see this, a lot of things click:</p>
+<ul>
+<li>token limits</li>
+<li>context windows</li>
+<li>why models “forget”</li>
+<li>why tools and databases are needed for real memory</li>
+</ul>
+<hr>
+<h2 id="a-mental-model">A Mental Model</h2>
+<p>Think of an LLM less like a brain, and more like:</p>
+<blockquote>
+<p>A function that completes text<br>
+given everything you feed it <em>right now</em></p>
+</blockquote>
+<p>Nothing more.<br>
+Nothing less.</p> </div>  </div> </section>    </main>  </body> </html>

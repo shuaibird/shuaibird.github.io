@@ -1,6 +1,23 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
+import SectionCard from "../../../components/SectionCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type PostEntry = CollectionEntry<"every-bit-of-ai">;
+
+const posts = (await getCollection("every-bit-of-ai"))
+  .filter((post: PostEntry) => !post.data.draft)
+  .sort(
+    (a: PostEntry, b: PostEntry) =>
+      b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+});
 ---
 
 <BaseLayout title="Every Bit of AI — shuaibird">
@@ -10,4 +27,55 @@ import PageHero from "../../../components/PageHero.astro";
     title="Every Bit of AI"
     subtitle="Small, steady notes on what the tools are becoming."
   />
+
+  <SectionCard title="Posts">
+    <div class="post-list">
+      {
+        posts.map((post: PostEntry) => (
+          <article class="post-item">
+            <a href={`/tech/every-bit-of-ai/${post.slug}/`}>
+              <div class="post-title">{post.data.title}</div>
+              <div class="post-meta">
+                <span>{formatter.format(post.data.date)}</span>
+                {post.data.description && (
+                  <span class="post-desc">{post.data.description}</span>
+                )}
+              </div>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </SectionCard>
+
+  <style>
+    .post-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .post-item a {
+      display: grid;
+      gap: 6px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface-glass);
+      border: 1px solid var(--color-border);
+    }
+
+    .post-title {
+      font-weight: 600;
+    }
+
+    .post-meta {
+      display: grid;
+      gap: 4px;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .post-desc {
+      color: var(--color-text-muted);
+    }
+  </style>
 </BaseLayout>

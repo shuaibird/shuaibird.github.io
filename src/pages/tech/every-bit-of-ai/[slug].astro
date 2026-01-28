@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PageHero from "../../../components/PageHero.astro";
+import SectionCard from "../../../components/SectionCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("every-bit-of-ai");
+  return posts
+    .filter((post: CollectionEntry<"every-bit-of-ai">) => !post.data.draft)
+    .map((post: CollectionEntry<"every-bit-of-ai">) => ({
+      params: { slug: post.slug },
+      props: { post },
+    }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"every-bit-of-ai"> };
+const { Content } = await post.render();
+const formatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "2-digit",
+  year: "numeric",
+});
+---
+
+<BaseLayout title={`${post.data.title} — Every Bit of AI`}>
+  <PageHero
+    variant="solo"
+    kicker={formatter.format(post.data.date)}
+    title={post.data.title}
+    subtitle={post.data.description}
+  />
+
+  <SectionCard>
+    <div class="post-body">
+      <Content />
+    </div>
+  </SectionCard>
+
+  <style>
+    .post-body :global(p) {
+      margin: 0 0 1.1rem;
+    }
+
+    .post-body :global(h2) {
+      margin-top: 1.6rem;
+    }
+
+    .post-body :global(blockquote) {
+      margin: 1.2rem 0;
+      padding: 12px 18px;
+      border-left: 3px solid var(--color-accent);
+      border-radius: 12px;
+      background: var(--surface-glass);
+      color: var(--color-text);
+    }
+
+    .post-body :global(blockquote p) {
+      margin: 0.4rem 0;
+    }
+
+    .post-body :global(blockquote p:first-child) {
+      margin-top: 0;
+    }
+
+    .post-body :global(blockquote p:last-child) {
+      margin-bottom: 0;
+    }
+  </style>
+</BaseLayout>

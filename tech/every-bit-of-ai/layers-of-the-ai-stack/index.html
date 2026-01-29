@@ -1,0 +1,333 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Layers of the AI Stack — Every Bit of AI</title><link rel="stylesheet" href="/_astro/index.DfnIsTN7.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-body[data-astro-cid-rd3rumq7] p{margin:0 0 1.1rem}.post-body[data-astro-cid-rd3rumq7] h2{margin-top:1.6rem}.post-body[data-astro-cid-rd3rumq7] blockquote{margin:1.2rem 0;padding:12px 18px;border-left:3px solid var(--color-accent);border-radius:12px;background:var(--surface-glass);color:var(--color-text)}.post-body[data-astro-cid-rd3rumq7] blockquote p{margin:.4rem 0}.post-body[data-astro-cid-rd3rumq7] blockquote p:first-child{margin-top:0}.post-body[data-astro-cid-rd3rumq7] blockquote p:last-child{margin-bottom:0}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" class="active" data-astro-cid-ctg3m53h>Every Bit of AI</a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Jan 29, 2026</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Layers of the AI Stack</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>What LLMs, RAG, agents, and multi-agent systems really are — and why they appeared in this order.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k>  <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-body" data-astro-cid-rd3rumq7> <h2 id="the-feeling-of-chaos">The Feeling of Chaos</h2>
+<p>If you’ve looked at the AI ecosystem recently, it probably feels overwhelming.</p>
+<p>New terms keep appearing:</p>
+<ul>
+<li>LLMs</li>
+<li>prompt engineering</li>
+<li>RAG</li>
+<li>LangChain</li>
+<li>tools</li>
+<li>agents</li>
+<li>MCP</li>
+<li>multi-agent systems</li>
+</ul>
+<p>They sound overlapping, abstract, and sometimes redundant.</p>
+<p>But they’re not random.</p>
+<p>They are <strong>layers</strong>, each one created because the previous layer hit a hard limit.</p>
+<p>This post explains:</p>
+<ul>
+<li>what each layer is</li>
+<li>what problem it targets</li>
+<li>how it works</li>
+<li>and when it emerged</li>
+</ul>
+<hr>
+<h2 id="1-llms--the-engine--20182020-mainstream-in-2022">1. LLMs — The Engine (≈ 2018–2020, mainstream in 2022)</h2>
+<p>Large Language Models are the foundation.</p>
+<p>At their core, they do one thing:</p>
+<blockquote>
+<p>Given a sequence of tokens, predict the most likely next token.</p>
+</blockquote>
+<p>The transformer architecture (2017) made this possible, but LLMs became practically transformative with:</p>
+<ul>
+<li>GPT-3 (2020)</li>
+<li>ChatGPT (2022)</li>
+</ul>
+<h3 id="what-problem-llms-solved">What problem LLMs solved</h3>
+<p>Before LLMs, human–computer interaction was rigid.</p>
+<p>LLMs allowed:</p>
+<ul>
+<li>natural language as an interface</li>
+<li>reasoning patterns instead of rules</li>
+<li>code as text</li>
+</ul>
+<h3 id="what-they-did-not-solve">What they did <em>not</em> solve</h3>
+<p>LLMs are:</p>
+<ul>
+<li>stateless</li>
+<li>non-deterministic</li>
+<li>unaware of truth</li>
+<li>disconnected from the real world</li>
+</ul>
+<p>They are powerful — but incomplete.</p>
+<hr>
+<h2 id="2-prompt-engineering--steering-the-engine--20202022">2. Prompt Engineering — Steering the Engine (≈ 2020–2022)</h2>
+<p>Once people started using LLMs seriously, a realization emerged:</p>
+<blockquote>
+<p>The model’s behavior depends heavily on <em>how</em> you ask.</p>
+</blockquote>
+<p>Prompt engineering is simply learning how to:</p>
+<ul>
+<li>structure instructions</li>
+<li>provide examples</li>
+<li>reduce ambiguity</li>
+<li>shape outputs</li>
+</ul>
+<h3 id="the-problem-it-solved">The problem it solved</h3>
+<p>“How do I get useful and repeatable results from a probabilistic model?”</p>
+<h3 id="why-it-appeared">Why it appeared</h3>
+<p>Because early users noticed:</p>
+<ul>
+<li>small wording changes caused massive output shifts</li>
+<li>there was no fine-tuning access for most users</li>
+</ul>
+<p>Prompting became the first control layer.</p>
+<hr>
+<h2 id="3-rag--grounding-the-model--20212023">3. RAG — Grounding the Model (≈ 2021–2023)</h2>
+<p>RAG (Retrieval-Augmented Generation) adds external knowledge at inference time.</p>
+<p>The system:</p>
+<ol>
+<li>retrieves relevant documents</li>
+<li>injects them into the prompt</li>
+<li>asks the model to answer using that context</li>
+</ol>
+<h3 id="the-problem-it-solved-1">The problem it solved</h3>
+<ul>
+<li>hallucinations</li>
+<li>outdated training data</li>
+<li>private or proprietary knowledge</li>
+</ul>
+<h3 id="why-it-mattered">Why it mattered</h3>
+<p>People didn’t want general intelligence.</p>
+<p>They wanted:</p>
+<blockquote>
+<p>“An AI that knows <strong>my data</strong>.”</p>
+</blockquote>
+<p>RAG was the fastest, cheapest way to achieve that.</p>
+<hr>
+<h2 id="4-orchestration-frameworks--managing-the-chaos--20222023">4. Orchestration Frameworks — Managing the Chaos (≈ 2022–2023)</h2>
+<p>Once developers combined:</p>
+<ul>
+<li>prompts</li>
+<li>RAG</li>
+<li>retries</li>
+<li>branching logic</li>
+<li>multiple model calls</li>
+</ul>
+<p>their codebases became unmanageable.</p>
+<p>Frameworks like LangChain emerged to:</p>
+<ul>
+<li>standardize workflows</li>
+<li>chain LLM calls</li>
+<li>manage context and state</li>
+</ul>
+<h3 id="the-problem-they-solved">The problem they solved</h3>
+<p>“How do I build an actual product, not just a notebook demo?”</p>
+<h3 id="the-tradeoff">The tradeoff</h3>
+<p>They reduce boilerplate —<br>
+but introduce abstraction and coupling.</p>
+<p>Many mature teams later outgrow them.</p>
+<hr>
+<h2 id="5-tools--plugins--from-thinking-to-doing--2023">5. Tools &#x26; Plugins — From Thinking to Doing (≈ 2023)</h2>
+<p>LLMs can explain how to do things.</p>
+<p>They cannot actually <strong>do</strong> things.</p>
+<p>Tools connect models to:</p>
+<ul>
+<li>APIs</li>
+<li>databases</li>
+<li>code execution</li>
+<li>browsers</li>
+<li>file systems</li>
+</ul>
+<h3 id="the-problem-this-layer-solved">The problem this layer solved</h3>
+<p>“How does language turn into real-world action?”</p>
+<h3 id="the-key-idea">The key idea</h3>
+<p>LLMs should not replace tools.</p>
+<p>They should <strong>decide when and how to use them</strong>.</p>
+<p>LLM = brain<br>
+Tools = hands</p>
+<hr>
+<h2 id="6-agents--loops-with-intent--20232024">6. Agents — Loops with Intent (≈ 2023–2024)</h2>
+<p>Agents introduce a loop:</p>
+<ul>
+<li>reason</li>
+<li>choose a tool</li>
+<li>act</li>
+<li>observe</li>
+<li>iterate</li>
+</ul>
+<p>Instead of one response, the system works toward a goal.</p>
+<h3 id="the-problem-agents-target">The problem agents target</h3>
+<ul>
+<li>multi-step tasks</li>
+<li>long-running objectives</li>
+<li>adaptive workflows</li>
+</ul>
+<h3 id="the-reality">The reality</h3>
+<p>Agents are powerful — and fragile.</p>
+<p>The successful ones are:</p>
+<ul>
+<li>narrow</li>
+<li>bounded</li>
+<li>heavily constrained</li>
+<li>tool-first</li>
+</ul>
+<p>This is where hype and reality diverged sharply.</p>
+<hr>
+<h2 id="7-standardization-mcp--taming-fragmentation--20242025">7. Standardization (MCP) — Taming Fragmentation (≈ 2024–2025)</h2>
+<p>As tools and agents multiplied, fragmentation became the bottleneck.</p>
+<p>Every system had:</p>
+<ul>
+<li>custom tool formats</li>
+<li>custom memory schemas</li>
+<li>custom integrations</li>
+</ul>
+<p>MCP (Model Context Protocol) emerged to standardize:</p>
+<ul>
+<li>tool interfaces</li>
+<li>context exchange</li>
+<li>model–system boundaries</li>
+</ul>
+<h3 id="the-problem-it-solves">The problem it solves</h3>
+<ul>
+<li>vendor lock-in</li>
+<li>brittle agent pipelines</li>
+<li>duplicated integration work</li>
+</ul>
+<p>This layer is infrastructure — not product hype.</p>
+<hr>
+<h2 id="8-multi-agent-systems--dividing-cognition--20242025">8. Multi-Agent Systems — Dividing Cognition (≈ 2024–2025)</h2>
+<p>Some tasks exceed what a single agent can reliably handle.</p>
+<p>Multi-agent systems divide responsibility:</p>
+<ul>
+<li>planner</li>
+<li>executor</li>
+<li>critic</li>
+<li>verifier</li>
+<li>specialist</li>
+</ul>
+<p>They collaborate, critique, or cross-check each other.</p>
+<h3 id="the-problem-they-address">The problem they address</h3>
+<ul>
+<li>reasoning blind spots</li>
+<li>error accumulation</li>
+<li>complex decision-making</li>
+</ul>
+<h3 id="the-cost">The cost</h3>
+<ul>
+<li>higher latency</li>
+<li>higher compute</li>
+<li>more orchestration complexity</li>
+</ul>
+<p>Used carefully, they improve quality.<br>
+Used casually, they become expensive chaos.</p>
+<hr>
+<h3 id="a-concrete-example-crawdbot">A Concrete Example: CrawDBot</h3>
+<p>CrawDBot is also a multi-agent system — but not in the hype-driven sense of multiple chatbots talking to each other.</p>
+<p>It uses <strong>role-based agents</strong>, each responsible for a clearly bounded task in the crawling pipeline:</p>
+<ul>
+<li><strong>Planner agent</strong> — decides where to go next and when to stop</li>
+<li><strong>Navigator agent</strong> — controls a real browser (scrolling, clicking, pagination)</li>
+<li><strong>Extractor agent</strong> — interprets the DOM and maps content into structured data</li>
+<li><strong>Validator agent</strong> — checks completeness, consistency, and duplication</li>
+<li><strong>State / memory layer</strong> — persists progress and feeds context back into planning</li>
+</ul>
+<p>Each agent can be implemented as:</p>
+<ul>
+<li>an LLM</li>
+<li>deterministic code</li>
+<li>or a hybrid of both</li>
+</ul>
+<p>The key idea is separation of cognitive responsibilities, not “AI personalities”.</p>
+<p>In systems like CrawDBot, LLMs act as an <strong>adaptive control layer</strong> on top of deterministic tooling (browsers, parsers, storage).<br>
+This makes the system more robust, debuggable, and scalable than a single monolithic agent.</p>
+<p>CrawDBot represents the <em>practical</em> end of multi-agent design:<br>
+goal-bounded, tool-first, and engineered for reliability rather than autonomy.</p>
+<hr>
+<h2 id="the-timeline-that-makes-it-click">The Timeline That Makes It Click</h2>
+<p>Each layer exists because the one before it hit a ceiling:</p>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>2018–2020  LLMs</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2020–2022  Prompt engineering</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2021–2023  RAG</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2022–2023  Orchestration frameworks</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2023       Tools &#x26; plugins</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2023–2024  Agents</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2024–2025  Standardization (MCP)</span></span>
+<span class="line"><span>      ↓</span></span>
+<span class="line"><span>2024–2025  Multi-agent systems</span></span></code></pre>
+<p>This is not hype.</p>
+<p>It is <strong>engineering pressure over time</strong>.</p>
+<hr>
+<h2 id="the-mental-model">The Mental Model</h2>
+<p>Modern AI systems are not “smart models”.</p>
+<p>They are:</p>
+<blockquote>
+<p>Deterministic software<br>
+augmented by probabilistic reasoning engines</p>
+</blockquote>
+<p>The future is not one autonomous super-AI.</p>
+<p>It’s <strong>boring, reliable systems</strong> —<br>
+with LLMs quietly embedded where judgment helps,<br>
+and hard constraints everywhere else.</p> </div>  </div> </section>    </main>  </body> </html>

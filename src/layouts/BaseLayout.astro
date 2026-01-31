@@ -145,6 +145,21 @@ const { title = "shuaibird — thinking, making, moving" } = Astro.props;
       main {
         padding: 64px var(--container-padding) 96px;
       }
+
+      /* === Mermaid diagrams (build wrapper) === */
+      :global(div.mermaid) {
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        background: rgba(0, 0, 0, 0.02);
+        padding: 24px;
+        border-radius: 16px;
+
+        margin: 32px 0;
+        overflow-x: auto;
+      }
     </style>
   </body>
 </html>

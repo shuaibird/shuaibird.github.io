@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Demystifying AI Tools — Every Bit of AI</title><link rel="stylesheet" href="/_astro/index.QE75l8cM.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-body[data-astro-cid-rd3rumq7] p{margin:0 0 1.1rem}.post-body[data-astro-cid-rd3rumq7] h2{margin-top:1.6rem}.post-body[data-astro-cid-rd3rumq7] blockquote{margin:1.2rem 0;padding:12px 18px;border-left:3px solid var(--color-accent);border-radius:12px;background:var(--surface-glass);color:var(--color-text)}.post-body[data-astro-cid-rd3rumq7] blockquote p{margin:.4rem 0}.post-body[data-astro-cid-rd3rumq7] blockquote p:first-child{margin-top:0}.post-body[data-astro-cid-rd3rumq7] blockquote p:last-child{margin-bottom:0}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" class="active" data-astro-cid-ctg3m53h>Every Bit of AI</a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Jan 30, 2026</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Demystifying AI Tools</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>What “tools” really are in AI systems, why they exist, and what’s actually happening when a model “calls” one.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k>  <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-body" data-astro-cid-rd3rumq7> <h2 id="why-ai-tools-exist-at-all">Why “AI Tools” Exist At All</h2>
+<p>LLMs are great at <strong>thinking in language</strong>.</p>
+<p>But they cannot reliably:</p>
+<ul>
+<li>fetch fresh data</li>
+<li>query your database</li>
+<li>hit an API</li>
+<li>read your files</li>
+<li>run code</li>
+<li>take actions in the world</li>
+</ul>
+<p>So “tools” were introduced as the missing bridge:</p>
+<blockquote>
+<p><strong>LLM = decision-making / reasoning</strong><br>
+<strong>Tools = execution / interaction with external systems</strong></p>
+</blockquote>
+<p>Tools turn an LLM from “a smart text box” into something that can <strong>do real work</strong>—while keeping the dangerous parts (actions) inside <strong>bounded, inspectable code</strong>.</p>
+<hr>
+<h2 id="what-a-tool-means-in-ai-context">What a “Tool” Means (In AI Context)</h2>
+<p>A tool is just a <strong>function</strong> (or API endpoint) that your application exposes to the model via a <strong>schema</strong>.</p>
+<p>The schema tells the model:</p>
+<ul>
+<li>what the tool is called</li>
+<li>what it does</li>
+<li>what arguments it expects (and their types)</li>
+</ul>
+<p>Then, when the model decides it needs the tool, it returns a structured message containing:</p>
+<ul>
+<li>the tool name</li>
+<li>JSON arguments</li>
+</ul>
+<p>Your <strong>code</strong> receives that request, runs the tool, and sends the results back to the model.</p>
+<p>No magic. No autonomy. Just a contract.</p>
+<hr>
+<h2 id="the-popular-misunderstanding">The Popular Misunderstanding</h2>
+<p>Many people imagine this:</p>
+<h3 id="-misunderstanding-the-llm-directly-executes-tools">❌ Misunderstanding: “The LLM directly executes tools”</h3>
+<div class="mermaid"><svg id="mermaid-0" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 407.359375px;" viewBox="0 0 407.359375 84" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-0{font-family:arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-0 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-0 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-0 .error-icon{fill:#552222;}#mermaid-0 .error-text{fill:#552222;stroke:#552222;}#mermaid-0 .edge-thickness-normal{stroke-width:1px;}#mermaid-0 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-0 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-0 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-0 .marker{fill:#000000;stroke:#000000;}#mermaid-0 .marker.cross{stroke:#000000;}#mermaid-0 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-0 p{margin:0;}#mermaid-0 .label{font-family:arial,sans-serif;color:#000000;}#mermaid-0 .cluster-label text{fill:#333;}#mermaid-0 .cluster-label span{color:#333;}#mermaid-0 .cluster-label span p{background-color:transparent;}#mermaid-0 .label text,#mermaid-0 span{fill:#000000;color:#000000;}#mermaid-0 .node rect,#mermaid-0 .node circle,#mermaid-0 .node ellipse,#mermaid-0 .node polygon,#mermaid-0 .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}#mermaid-0 .rough-node .label text,#mermaid-0 .node .label text,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-anchor:middle;}#mermaid-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-0 .rough-node .label,#mermaid-0 .node .label,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-align:center;}#mermaid-0 .node.clickable{cursor:pointer;}#mermaid-0 .root .anchor path{fill:#000000!important;stroke-width:0;stroke:#000000;}#mermaid-0 .arrowheadPath{fill:green;}#mermaid-0 .edgePath .path{stroke:#000000;stroke-width:2.0px;}#mermaid-0 .flowchart-link{stroke:#000000;fill:none;}#mermaid-0 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-0 .edgeLabel p{background-color:#e8e8e8;}#mermaid-0 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-0 .cluster rect{fill:#cdffb2;stroke:#6eaa49;stroke-width:1px;}#mermaid-0 .cluster text{fill:#333;}#mermaid-0 .cluster span{color:#333;}#mermaid-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(78.1578947368, 58.4615384615%, 84.5098039216%);border:1px solid #6eaa49;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-0 rect.text{fill:none;stroke-width:0;}#mermaid-0 .icon-shape,#mermaid-0 .image-shape{background-color:#e8e8e8;text-align:center;}#mermaid-0 .icon-shape p,#mermaid-0 .image-shape p{background-color:#e8e8e8;padding:2px;}#mermaid-0 .icon-shape rect,#mermaid-0 .image-shape rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-0 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-0 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker id="mermaid-0_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M60.449,35.518L70.753,32.932C81.057,30.345,101.665,25.173,121.62,25.111C141.575,25.05,160.877,30.1,170.527,32.625L180.178,35.15" id="L_Code_LLM_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Code_LLM_0" data-points="W3sieCI6NjAuNDQ4OTM5NTU3NDk1MTYsInkiOjM1LjUxODExOTgxNTE0MzM4Nn0seyJ4IjoxMjIuMjczNDM3NSwieSI6MjB9LHsieCI6MTg0LjA0Nzg5MDA2NTQwMTQyLCJ5IjozNi4xNjI0ODgwMDc0NDg3fV0=" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M184.048,47.838L173.752,50.531C163.456,53.225,142.865,58.613,122.912,58.882C102.958,59.152,83.644,54.304,73.986,51.88L64.329,49.456" id="L_LLM_Code_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_LLM_Code_0" data-points="W3sieCI6MTg0LjA0Nzg5MDA2NTQwMTQyLCJ5Ijo0Ny44Mzc1MTE5OTI1NTEzfSx7IngiOjEyMi4yNzM0Mzc1LCJ5Ijo2NH0seyJ4Ijo2MC40NDg5Mzk1NTc0OTUxNiwieSI6NDguNDgxODgwMTg0ODU2NjE0fV0=" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M233.422,42L243.22,42C253.018,42,272.615,42,292.211,42C311.807,42,331.404,42,341.202,42L351,42" id="L_LLM_Tool_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_LLM_Tool_0" data-points="W3sieCI6MjI5LjQyMTg3NSwieSI6NDJ9LHsieCI6MjkyLjIxMDkzNzUsInkiOjQyfSx7IngiOjM1NSwieSI6NDJ9XQ==" marker-start="url(#mermaid-0_flowchart-v2-pointStart)" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(122.2734375, 20)"><g class="label" data-id="L_Code_LLM_0" transform="translate(-25.7890625, -12)"><foreignObject width="51.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Prompt</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(122.2734375, 64)"><g class="label" data-id="L_LLM_Code_0" transform="translate(-36.0234375, -12)"><foreignObject width="72.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Response</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(292.2109375, 42)"><g class="label" data-id="L_LLM_Tool_0" transform="translate(-37.7890625, -12)"><foreignObject width="75.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>EXECUTE</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-Code-0" transform="translate(34.625, 42)"><circle class="basic label-container" style="" r="26.625" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-19.125, -12)"><rect></rect><foreignObject width="38.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Code</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-LLM-1" transform="translate(206.359375, 42)"><circle class="basic label-container" style="" r="23.0625" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-15.5625, -12)"><rect></rect><foreignObject width="31.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>LLM</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Tool-2" transform="translate(377.1796875, 42)"><circle class="basic label-container" style="" r="22.1796875" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-14.6796875, -12)"><rect></rect><foreignObject width="29.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Tool</p></span></div></foreignObject></g></g></g></g></g></svg></div>
+<p>This mental model suggests the LLM has:</p>
+<ul>
+<li>direct access to infrastructure</li>
+<li>execution privileges</li>
+<li>agency over your systems</li>
+</ul>
+<p>That is <strong>not</strong> how tool calling works.</p>
+<hr>
+<h2 id="the-correct-mental-model">The Correct Mental Model</h2>
+<h3 id="-reality-the-llm-requests-your-code-executes">✅ Reality: “The LLM requests; your code executes”</h3>
+<div class="mermaid"><svg id="mermaid-1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 240.953125px;" viewBox="0 2.142759323120117 240.953125 165.27911376953125" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1{font-family:arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1 .error-icon{fill:#552222;}#mermaid-1 .error-text{fill:#552222;stroke:#552222;}#mermaid-1 .edge-thickness-normal{stroke-width:1px;}#mermaid-1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1 .marker{fill:#000000;stroke:#000000;}#mermaid-1 .marker.cross{stroke:#000000;}#mermaid-1 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-1 p{margin:0;}#mermaid-1 .label{font-family:arial,sans-serif;color:#000000;}#mermaid-1 .cluster-label text{fill:#333;}#mermaid-1 .cluster-label span{color:#333;}#mermaid-1 .cluster-label span p{background-color:transparent;}#mermaid-1 .label text,#mermaid-1 span{fill:#000000;color:#000000;}#mermaid-1 .node rect,#mermaid-1 .node circle,#mermaid-1 .node ellipse,#mermaid-1 .node polygon,#mermaid-1 .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}#mermaid-1 .rough-node .label text,#mermaid-1 .node .label text,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-anchor:middle;}#mermaid-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1 .rough-node .label,#mermaid-1 .node .label,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-align:center;}#mermaid-1 .node.clickable{cursor:pointer;}#mermaid-1 .root .anchor path{fill:#000000!important;stroke-width:0;stroke:#000000;}#mermaid-1 .arrowheadPath{fill:green;}#mermaid-1 .edgePath .path{stroke:#000000;stroke-width:2.0px;}#mermaid-1 .flowchart-link{stroke:#000000;fill:none;}#mermaid-1 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-1 .edgeLabel p{background-color:#e8e8e8;}#mermaid-1 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-1 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-1 .cluster rect{fill:#cdffb2;stroke:#6eaa49;stroke-width:1px;}#mermaid-1 .cluster text{fill:#333;}#mermaid-1 .cluster span{color:#333;}#mermaid-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(78.1578947368, 58.4615384615%, 84.5098039216%);border:1px solid #6eaa49;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1 rect.text{fill:none;stroke-width:0;}#mermaid-1 .icon-shape,#mermaid-1 .image-shape{background-color:#e8e8e8;text-align:center;}#mermaid-1 .icon-shape p,#mermaid-1 .image-shape p{background-color:#e8e8e8;padding:2px;}#mermaid-1 .icon-shape rect,#mermaid-1 .image-shape rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker id="mermaid-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M58.125,55.105L69.111,49.254C80.096,43.404,102.068,31.702,122.993,28.398C143.918,25.094,163.796,30.188,173.736,32.735L183.675,35.282" id="L_Code_LLM_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Code_LLM_0" data-points="W3sieCI6NTguMTI0ODkwMDMwODA5Njk1LCJ5Ijo1NS4xMDUyNzIwMjE0ODk2OX0seyJ4IjoxMjQuMDM5MDYyNSwieSI6MjB9LHsieCI6MTg3LjU0OTk4NzA3NDI2ODU2LCJ5IjozNi4yNzUwNzE3NjI3NzU1MjV9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M187.791,48.595L177.166,51.766C166.541,54.937,145.29,61.279,124.866,64.45C104.443,67.621,84.846,67.621,75.048,67.621L65.25,67.621" id="L_LLM_Code_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_LLM_Code_0" data-points="W3sieCI6MTg3Ljc5MTI1ODkxODE1MDY3LCJ5Ijo0OC41OTUyMTk4NjIxNzM1Mn0seyJ4IjoxMjQuMDM5MDYyNSwieSI6NjcuNjIxMDkzNzV9LHsieCI6NjEuMjUsInkiOjY3LjYyMTA5Mzc1fV0=" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M58.789,86.436L69.664,94.904C80.539,103.371,102.289,120.307,123.109,128.774C143.93,137.242,163.82,137.242,173.766,137.242L183.711,137.242" id="L_Code_Tool_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Code_Tool_0" data-points="W3sieCI6NTUuNjMyNzUyNzI1NjQwNjcsInkiOjgzLjk3ODUwNjQ1NTUwODY4fSx7IngiOjEyNC4wMzkwNjI1LCJ5IjoxMzcuMjQyMTg3NX0seyJ4IjoxODcuNzEwOTM3NSwieSI6MTM3LjI0MjE4NzV9XQ==" marker-start="url(#mermaid-1_flowchart-v2-pointStart)" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(120.01578, 22.14276)"><g class="label" data-id="L_Code_LLM_0" transform="translate(-25.7890625, -12)"><foreignObject width="51.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Prompt</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(124.0390625, 67.62109375)"><g class="label" data-id="L_LLM_Code_0" transform="translate(-36.0234375, -12)"><foreignObject width="72.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Response</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(124.0390625, 137.2421875)"><g class="label" data-id="L_Code_Tool_0" transform="translate(-37.7890625, -12)"><foreignObject width="75.578125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>EXECUTE</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-Code-0" transform="translate(34.625, 67.62109375)"><circle class="basic label-container" style="" r="26.625" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-19.125, -12)"><rect></rect><foreignObject width="38.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Code</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-LLM-1" transform="translate(209.890625, 42)"><circle class="basic label-container" style="" r="23.0625" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-15.5625, -12)"><rect></rect><foreignObject width="31.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>LLM</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Tool-2" transform="translate(209.890625, 137.2421875)"><circle class="basic label-container" style="" r="22.1796875" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-14.6796875, -12)"><rect></rect><foreignObject width="29.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Tool</p></span></div></foreignObject></g></g></g></g></g></svg></div>
+<p>What actually happens:</p>
+<ol>
+<li>Your application sends messages to the LLM.</li>
+<li>The LLM replies with either:
+<ul>
+<li>a normal text response, or</li>
+<li>a <strong>tool request</strong> (structured JSON)</li>
+</ul>
+</li>
+<li>Your application validates the request.</li>
+<li>Your application executes the tool.</li>
+<li>Tool results are sent back to the LLM.</li>
+<li>The LLM produces a final user-facing answer.</li>
+</ol>
+<p>The LLM never “runs” anything.<br>
+It only <strong>asks</strong>.</p>
+<hr>
+<h2 id="demo-tool-calling-with-shopping-prices-python">Demo: Tool Calling With Shopping Prices (Python)</h2>
+<p>Below is a minimal demo showing how tool calling works using a shopping-price example.</p>
+<hr>
+<h3 id="1-define-the-real-tool-function">1) Define the Real Tool Function</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> json</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#FF9E64">ITEM_PRICES</span><span style="color:#89DDFF"> =</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">airpods pro</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 199</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">iphone 15</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 799</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">nintendo switch</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 299</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">kindle paperwhite</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 149</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> get_item_price</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">item_name</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> str</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF"> -></span><span style="color:#0DB9D7"> str</span><span style="color:#9ABDF5">:</span></span>
+<span class="line"><span style="color:#0DB9D7">    print</span><span style="color:#9ABDF5">(</span><span style="color:#BB9AF7">f</span><span style="color:#9ECE6A">"[tool] get_item_price called with item_name=</span><span style="color:#BB9AF7">{</span><span style="color:#C0CAF5">item_name</span><span style="color:#BB9AF7">!r}</span><span style="color:#9ECE6A">"</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">    key </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> item_name</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">lower</span><span style="color:#9ABDF5">()</span></span>
+<span class="line"><span style="color:#A9B1D6">    price </span><span style="color:#89DDFF">=</span><span style="color:#FF9E64"> ITEM_PRICES</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">get</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">key</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#A9B1D6"> price </span><span style="color:#BB9AF7">is</span><span style="color:#FF9E64"> None</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#BB9AF7">        return</span><span style="color:#BB9AF7"> f</span><span style="color:#9ECE6A">"Unknown item: </span><span style="color:#BB9AF7">{</span><span style="color:#C0CAF5">item_name</span><span style="color:#BB9AF7">}</span><span style="color:#9ECE6A">"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#BB9AF7"> f</span><span style="color:#9ECE6A">"</span><span style="color:#BB9AF7">{</span><span style="color:#C0CAF5">item_name</span><span style="color:#BB9AF7">}</span><span style="color:#9ECE6A"> costs $</span><span style="color:#BB9AF7">{</span><span style="color:#C0CAF5">price</span><span style="color:#BB9AF7">}</span><span style="color:#9ECE6A">"</span></span></code></pre>
+<p>This is <strong>real code</strong>.<br>
+Deterministic. Testable. Auditable.</p>
+<hr>
+<h3 id="2-describe-the-tool-for-the-llm-schema">2) Describe the Tool for the LLM (Schema)</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#A9B1D6">price_function </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">get_item_price</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">description</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Get the price of a shopping item by name.</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">    "</span><span style="color:#9ECE6A">parameters</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">type</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">object</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">properties</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">type</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">string</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">description</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Name of the shopping item.</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF">            }</span></span>
+<span class="line"><span style="color:#89DDFF">        },</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">required</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">],</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">additionalProperties</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> False</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span>
+<span class="line"><span style="color:#89DDFF">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">tools </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [{</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">type</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">function</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">function</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#A9B1D6"> price_function</span><span style="color:#89DDFF">}]</span></span></code></pre>
+<p>This schema is <strong>not code execution</strong>.<br>
+It’s a <em>capability description</em>.</p>
+<hr>
+<h3 id="3-single-tool-call-handling">3) Single Tool Call Handling</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> handle_tool_call</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">message</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">    tool_call </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> message</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">tool_calls</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span></span>
+<span class="line"><span style="color:#A9B1D6">    arguments </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> json</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">loads</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tool_call</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">function</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">arguments</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">    item_name </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> arguments</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">    result </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> get_item_price</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">item_name</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#89DDFF"> {</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">tool</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#A9B1D6"> result</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">tool_call_id</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#A9B1D6"> tool_call</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">id</span></span>
+<span class="line"><span style="color:#89DDFF">    }</span></span></code></pre>
+<hr>
+<h3 id="4-chat-loop">4) Chat Loop</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> chat</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">message</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> history</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">    messages </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [{</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">system</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#A9B1D6"> system_message</span><span style="color:#89DDFF">}]</span><span style="color:#89DDFF"> +</span><span style="color:#A9B1D6"> history</span></span>
+<span class="line"><span style="color:#A9B1D6">    messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">user</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> message</span><span style="color:#89DDFF">}</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">    response </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> openai</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">chat</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">completions</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#E0AF68">        model</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">MODEL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">        messages</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">messages</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">        tools</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">tools</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    if</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">finish_reason </span><span style="color:#BB9AF7">==</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">tool_calls</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#A9B1D6">        assistant_msg </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span></span>
+<span class="line"><span style="color:#A9B1D6">        tool_msg </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> handle_tool_call</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">assistant_msg</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">        messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">assistant_msg</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">        messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tool_msg</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">        response </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> openai</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">chat</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">completions</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#E0AF68">            model</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">MODEL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">            messages</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">messages</span></span>
+<span class="line"><span style="color:#9ABDF5">        )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">content</span></span></code></pre>
+<hr>
+<h2 id="example-qa">Example Q&#x26;A</h2>
+<p><strong>User:</strong> How much is AirPods Pro?<br>
+<strong>Assistant:</strong> AirPods Pro costs $199.</p>
+<p>Internally:</p>
+<ul>
+<li>LLM requests <code>get_item_price("AirPods Pro")</code></li>
+<li>Your code executes</li>
+<li>Result is returned to the model</li>
+</ul>
+<hr>
+<h2 id="exception-1-multiple-tool-calls">Exception #1: Multiple Tool Calls</h2>
+<p>If the user asks:</p>
+<blockquote>
+<p>Compare AirPods Pro and Nintendo Switch prices</p>
+</blockquote>
+<p>The model may return <strong>multiple tool calls</strong>.</p>
+<h3 id="fix-handle-all-tool-calls">Fix: Handle All Tool Calls</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> handle_tool_calls</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">message</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">    responses </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> []</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#A9B1D6"> tool_call </span><span style="color:#BB9AF7">in</span><span style="color:#A9B1D6"> message</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">tool_calls</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#A9B1D6">        arguments </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> json</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">loads</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tool_call</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">function</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">arguments</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">        item_name </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> arguments</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">]</span></span>
+<span class="line"><span style="color:#A9B1D6">        result </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> get_item_price</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">item_name</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">        responses</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">tool</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> result</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">            "</span><span style="color:#9ECE6A">tool_call_id</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> tool_call</span><span style="color:#89DDFF">.</span><span style="color:#C0CAF5">id</span></span>
+<span class="line"><span style="color:#89DDFF">        }</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#A9B1D6"> responses</span></span></code></pre>
+<h3 id="result">Result</h3>
+<p><strong>Assistant:</strong></p>
+<ul>
+<li>AirPods Pro: $199</li>
+<li>Nintendo Switch: $299</li>
+</ul>
+<hr>
+<h2 id="exception-2-nested-tool-calls">Exception #2: Nested Tool Calls</h2>
+<p>User prompt:</p>
+<blockquote>
+<p>If AirPods Pro is under $250, also check Kindle Paperwhite.</p>
+</blockquote>
+<p>This requires <strong>multiple rounds</strong> of tool calls.</p>
+<h3 id="fix-loop-until-no-more-tool-requests">Fix: Loop Until No More Tool Requests</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> chat</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">message</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> history</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">    messages </span><span style="color:#89DDFF">=</span><span style="color:#89DDFF"> [{</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">system</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#A9B1D6"> system_message</span><span style="color:#89DDFF">}]</span><span style="color:#89DDFF"> +</span><span style="color:#A9B1D6"> history</span></span>
+<span class="line"><span style="color:#A9B1D6">    messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">{</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">role</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">user</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">content</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5"> message</span><span style="color:#89DDFF">}</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">    response </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> openai</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">chat</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">completions</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#E0AF68">        model</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">MODEL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">        messages</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">messages</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">        tools</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">tools</span></span>
+<span class="line"><span style="color:#9ABDF5">    )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    while</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">finish_reason </span><span style="color:#BB9AF7">==</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">tool_calls</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#A9B1D6">        assistant_msg </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span></span>
+<span class="line"><span style="color:#A9B1D6">        tool_msgs </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> handle_tool_calls</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">assistant_msg</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">        messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">append</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">assistant_msg</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">        messages</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">extend</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tool_msgs</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A9B1D6">        response </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> openai</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">chat</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">completions</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">create</span><span style="color:#9ABDF5">(</span></span>
+<span class="line"><span style="color:#E0AF68">            model</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">MODEL</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">            messages</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">messages</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#E0AF68">            tools</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">tools</span></span>
+<span class="line"><span style="color:#9ABDF5">        )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">content</span></span></code></pre>
+<h3 id="result-1">Result</h3>
+<p><strong>Assistant:</strong></p>
+<ul>
+<li>AirPods Pro costs $199</li>
+<li>Kindle Paperwhite costs $149</li>
+</ul>
+<hr>
+<h2 id="final-takeaway">Final Takeaway</h2>
+<p>Tools don’t make LLMs autonomous.</p>
+<p>They make AI systems:</p>
+<ul>
+<li>grounded</li>
+<li>inspectable</li>
+<li>controllable</li>
+<li>production-safe</li>
+</ul>
+<p>The LLM reasons.<br>
+Your code decides.</p> </div>  </div> </section>    </main>  </body> </html>

@@ -1,4 +1,6 @@
 ---
+import { techSeries } from "../data/techSeries";
+
 const pathname = Astro.url.pathname;
 const isActiveSection = (href: string) => pathname.startsWith(href);
 const isActiveLink = (href: string) => {
@@ -17,11 +19,16 @@ const isActiveLink = (href: string) => {
       <details class="menu" class:list={{ active: isActiveSection("/tech/") }}>
         <summary class="menu-trigger">Tech</summary>
         <div class="menu-panel">
-          <a
-            href="/tech/every-bit-of-ai/"
-            class:list={{ active: isActiveLink("/tech/every-bit-of-ai/") }}
-            >Every Bit of AI</a
-          >
+          {
+            techSeries.map((series) => (
+              <a
+                href={`/tech/${series.slug}/`}
+                class:list={{ active: isActiveLink(`/tech/${series.slug}/`) }}
+              >
+                {series.title}
+              </a>
+            ))
+          }
         </div>
       </details>
       <details class="menu" class:list={{ active: isActiveSection("/life/") }}>

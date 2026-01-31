@@ -3,18 +3,32 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
 import SectionCard from "../../../components/SectionCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import {
+  techSeries,
+  type TechSeries,
+  type TechSeriesCollection,
+} from "../../../data/techSeries";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("every-bit-of-ai");
-  return posts
-    .filter((post: CollectionEntry<"every-bit-of-ai">) => !post.data.draft)
-    .map((post: CollectionEntry<"every-bit-of-ai">) => ({
-      params: { slug: post.slug },
-      props: { post },
-    }));
+  const seriesEntries = await Promise.all(
+    techSeries.map(async (series) => {
+      const posts = await getCollection(series.collection);
+      return posts
+        .filter((post) => !post.data.draft)
+        .map((post) => ({
+          params: { series: series.slug, slug: post.slug },
+          props: { series, post },
+        }));
+    }),
+  );
+
+  return seriesEntries.flat();
 }
 
-const { post } = Astro.props as { post: CollectionEntry<"every-bit-of-ai"> };
+const { series, post } = Astro.props as {
+  series: TechSeries;
+  post: CollectionEntry<TechSeriesCollection>;
+};
 const { Content } = await post.render();
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -23,7 +37,7 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 });
 ---
 
-<BaseLayout title={`${post.data.title} — Every Bit of AI`}>
+<BaseLayout title={`${post.data.title} — ${series.title}`}>
   <PageHero
     variant="solo"
     kicker={formatter.format(post.data.date)}

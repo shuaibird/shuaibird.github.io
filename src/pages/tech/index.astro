@@ -3,6 +3,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageHero from "../../components/PageHero.astro";
 import SectionCard from "../../components/SectionCard.astro";
 import LinkList from "../../components/LinkList.astro";
+import { techSeries } from "../../data/techSeries";
+
+const seriesItems = techSeries.map((series) => ({
+  href: `/tech/${series.slug}/`,
+  label: series.title,
+  meta: series.meta,
+}));
 ---
 
 <BaseLayout title="Tech — shuaibird">
@@ -13,14 +20,6 @@ import LinkList from "../../components/LinkList.astro";
   />
 
   <SectionCard title="Series">
-    <LinkList
-      items={[
-        {
-          href: "/tech/every-bit-of-ai/",
-          label: "Every Bit of AI",
-          meta: "small, steady notes",
-        },
-      ]}
-    />
+    <LinkList items={seriesItems} />
   </SectionCard>
 </BaseLayout>

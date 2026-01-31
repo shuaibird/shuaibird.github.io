@@ -1,6 +1,6 @@
 import { defineCollection, z } from "astro:content";
 
-const everyBitOfAi = defineCollection({
+const techSeriesCollection = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
@@ -11,5 +11,6 @@ const everyBitOfAi = defineCollection({
 });
 
 export const collections = {
-  "every-bit-of-ai": everyBitOfAi,
+  "every-bit-of-ai": techSeriesCollection,
+  engineering: techSeriesCollection,
 };

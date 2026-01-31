@@ -2,16 +2,21 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
 import SectionCard from "../../../components/SectionCard.astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import { techSeries, type TechSeries } from "../../../data/techSeries";
 
-type PostEntry = CollectionEntry<"every-bit-of-ai">;
+export async function getStaticPaths() {
+  return techSeries.map((series) => ({
+    params: { series: series.slug },
+    props: { series },
+  }));
+}
 
-const posts = (await getCollection("every-bit-of-ai"))
-  .filter((post: PostEntry) => !post.data.draft)
-  .sort(
-    (a: PostEntry, b: PostEntry) =>
-      b.data.date.valueOf() - a.data.date.valueOf(),
-  );
+const { series } = Astro.props as { series: TechSeries };
+
+const posts = (await getCollection(series.collection))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -20,20 +25,20 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 });
 ---
 
-<BaseLayout title="Every Bit of AI — shuaibird">
+<BaseLayout title={`${series.title} — shuaibird`}>
   <PageHero
     variant="solo"
-    kicker="Tech Series"
-    title="Every Bit of AI"
-    subtitle="Small, steady notes on what the tools are becoming."
+    kicker={series.kicker}
+    title={series.title}
+    subtitle={series.subtitle}
   />
 
   <SectionCard title="Posts">
     <div class="post-list">
       {
-        posts.map((post: PostEntry) => (
+        posts.map((post) => (
           <article class="post-item">
-            <a href={`/tech/every-bit-of-ai/${post.slug}/`}>
+            <a href={`/tech/${series.slug}/${post.slug}/`}>
               <div class="post-title">{post.data.title}</div>
               <div class="post-meta">
                 <span>{formatter.format(post.data.date)}</span>

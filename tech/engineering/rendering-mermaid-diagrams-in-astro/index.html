@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Rendering Mermaid Diagrams in Astro: From Client-Side to Build-Time — Engineering</title><link rel="stylesheet" href="/_astro/index.QE75l8cM.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-body[data-astro-cid-4o3ag3md] p{margin:0 0 1.1rem}.post-body[data-astro-cid-4o3ag3md] h2{margin-top:1.6rem}.post-body[data-astro-cid-4o3ag3md] blockquote{margin:1.2rem 0;padding:12px 18px;border-left:3px solid var(--color-accent);border-radius:12px;background:var(--surface-glass);color:var(--color-text)}.post-body[data-astro-cid-4o3ag3md] blockquote p{margin:.4rem 0}.post-body[data-astro-cid-4o3ag3md] blockquote p:first-child{margin-top:0}.post-body[data-astro-cid-4o3ag3md] blockquote p:last-child{margin-bottom:0}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" data-astro-cid-ctg3m53h> Every Bit of AI </a><a href="/tech/engineering/" class="active" data-astro-cid-ctg3m53h> Engineering </a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Jan 31, 2026</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Rendering Mermaid Diagrams in Astro: From Client-Side to Build-Time</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>A personal journey of enabling Mermaid rendering in an Astro project, and why build-time SVG generation matters.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k>  <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-body" data-astro-cid-4o3ag3md> <div class="mermaid"><svg id="mermaid-0" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1353.90625px;" viewBox="0 0 1353.90625 198" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-0{font-family:arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-0 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-0 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-0 .error-icon{fill:#552222;}#mermaid-0 .error-text{fill:#552222;stroke:#552222;}#mermaid-0 .edge-thickness-normal{stroke-width:1px;}#mermaid-0 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-0 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-0 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-0 .marker{fill:#000000;stroke:#000000;}#mermaid-0 .marker.cross{stroke:#000000;}#mermaid-0 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-0 p{margin:0;}#mermaid-0 .label{font-family:arial,sans-serif;color:#000000;}#mermaid-0 .cluster-label text{fill:#333;}#mermaid-0 .cluster-label span{color:#333;}#mermaid-0 .cluster-label span p{background-color:transparent;}#mermaid-0 .label text,#mermaid-0 span{fill:#000000;color:#000000;}#mermaid-0 .node rect,#mermaid-0 .node circle,#mermaid-0 .node ellipse,#mermaid-0 .node polygon,#mermaid-0 .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}#mermaid-0 .rough-node .label text,#mermaid-0 .node .label text,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-anchor:middle;}#mermaid-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-0 .rough-node .label,#mermaid-0 .node .label,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-align:center;}#mermaid-0 .node.clickable{cursor:pointer;}#mermaid-0 .root .anchor path{fill:#000000!important;stroke-width:0;stroke:#000000;}#mermaid-0 .arrowheadPath{fill:green;}#mermaid-0 .edgePath .path{stroke:#000000;stroke-width:2.0px;}#mermaid-0 .flowchart-link{stroke:#000000;fill:none;}#mermaid-0 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-0 .edgeLabel p{background-color:#e8e8e8;}#mermaid-0 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-0 .cluster rect{fill:#cdffb2;stroke:#6eaa49;stroke-width:1px;}#mermaid-0 .cluster text{fill:#333;}#mermaid-0 .cluster span{color:#333;}#mermaid-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(78.1578947368, 58.4615384615%, 84.5098039216%);border:1px solid #6eaa49;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-0 rect.text{fill:none;stroke-width:0;}#mermaid-0 .icon-shape,#mermaid-0 .image-shape{background-color:#e8e8e8;text-align:center;}#mermaid-0 .icon-shape p,#mermaid-0 .image-shape p{background-color:#e8e8e8;padding:2px;}#mermaid-0 .icon-shape rect,#mermaid-0 .image-shape rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-0 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-0 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker id="mermaid-0_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M198.523,66L212.651,60.833C226.779,55.667,255.034,45.333,276.59,40.167C298.146,35,313.003,35,320.431,35L327.859,35" id="L_MD_AM_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MD_AM_0" data-points="W3sieCI6MTk4LjUyMzQzNzUsInkiOjY2fSx7IngiOjI4My4yODkwNjI1LCJ5IjozNX0seyJ4IjozMzEuODU5Mzc1LCJ5IjozNX1d" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M495,35L500.279,35C505.557,35,516.115,35,536.669,35C557.224,35,587.776,35,603.052,35L618.328,35" id="L_AM_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_AM_B_0" data-points="W3sieCI6NDk1LCJ5IjozNX0seyJ4Ijo1MjYuNjcxODc1LCJ5IjozNX0seyJ4Ijo2MjIuMzI4MTI1LCJ5IjozNX1d" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M741.016,35L756.958,35C772.901,35,804.786,35,828.479,35C852.172,35,867.672,35,875.422,35L883.172,35" id="L_B_JS_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_JS_0" data-points="W3sieCI6NzQxLjAxNTYyNSwieSI6MzV9LHsieCI6ODM2LjY3MTg3NSwieSI6MzV9LHsieCI6ODg3LjE3MTg3NSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M1032.531,35L1040.948,35C1049.365,35,1066.198,35,1078.115,35C1090.031,35,1097.031,35,1100.531,35L1104.031,35" id="L_JS_SVG1_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_JS_SVG1_0" data-points="W3sieCI6MTAzMi41MzEyNSwieSI6MzV9LHsieCI6MTA4My4wMzEyNSwieSI6MzV9LHsieCI6MTEwOC4wMzEyNSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M198.523,120L212.651,125.167C226.779,130.333,255.034,140.667,275.478,145.833C295.922,151,308.555,151,314.871,151L321.188,151" id="L_MD_RM_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_MD_RM_0" data-points="W3sieCI6MTk4LjUyMzQzNzUsInkiOjEyMH0seyJ4IjoyODMuMjg5MDYyNSwieSI6MTUxfSx7IngiOjMyNS4xODc1LCJ5IjoxNTF9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M501.672,151L505.839,151C510.005,151,518.339,151,526.005,151C533.672,151,540.672,151,544.172,151L547.672,151" id="L_RM_SVG2_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_RM_SVG2_0" data-points="W3sieCI6NTAxLjY3MTg3NSwieSI6MTUxfSx7IngiOjUyNi42NzE4NzUsInkiOjE1MX0seyJ4Ijo1NTEuNjcxODc1LCJ5IjoxNTF9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M811.672,151L815.839,151C820.005,151,828.339,151,836.005,151C843.672,151,850.672,151,854.172,151L857.672,151" id="L_SVG2_HTML_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_SVG2_HTML_0" data-points="W3sieCI6ODExLjY3MTg3NSwieSI6MTUxfSx7IngiOjgzNi42NzE4NzUsInkiOjE1MX0seyJ4Ijo4NjEuNjcxODc1LCJ5IjoxNTF9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(283.2890625, 35)"><g class="label" data-id="L_MD_AM_0" transform="translate(-14.2265625, -12)"><foreignObject width="28.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Dev</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_AM_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_JS_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_JS_SVG1_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(283.2890625, 151)"><g class="label" data-id="L_MD_RM_0" transform="translate(-16.8984375, -12)"><foreignObject width="33.796875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>Prod</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_RM_SVG2_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_SVG2_HTML_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-MD-0" transform="translate(124.6953125, 93)"><rect class="basic label-container" style="" x="-116.6953125" y="-27" width="233.390625" height="54"></rect><g class="label" style="" transform="translate(-86.6953125, -12)"><rect></rect><foreignObject width="173.390625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Markdown with Mermaid</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-AM-2" transform="translate(413.4296875, 35)"><rect class="basic label-container" style="" x="-81.5703125" y="-27" width="163.140625" height="54"></rect><g class="label" style="" transform="translate(-51.5703125, -12)"><rect></rect><foreignObject width="103.140625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>astro-mermaid</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-B-4" transform="translate(681.671875, 35)"><rect class="basic label-container" style="" x="-59.34375" y="-27" width="118.6875" height="54"></rect><g class="label" style="" transform="translate(-29.34375, -12)"><rect></rect><foreignObject width="58.6875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Browser</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-JS-6" transform="translate(959.8515625, 35)"><rect class="basic label-container" style="" x="-72.6796875" y="-27" width="145.359375" height="54"></rect><g class="label" style="" transform="translate(-42.6796875, -12)"><rect></rect><foreignObject width="85.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Mermaid JS</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-SVG1-8" transform="translate(1226.96875, 35)"><rect class="basic label-container" style="" x="-118.9375" y="-27" width="237.875" height="54"></rect><g class="label" style="" transform="translate(-88.9375, -12)"><rect></rect><foreignObject width="177.875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>SVG rendered at runtime</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-RM-10" transform="translate(413.4296875, 151)"><rect class="basic label-container" style="" x="-88.2421875" y="-27" width="176.484375" height="54"></rect><g class="label" style="" transform="translate(-58.2421875, -12)"><rect></rect><foreignObject width="116.484375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>rehype-mermaid</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-SVG2-12" transform="translate(681.671875, 151)"><rect class="basic label-container" style="" x="-130" y="-39" width="260" height="78"></rect><g class="label" style="" transform="translate(-100, -24)"><rect></rect><foreignObject width="200" height="48"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table; white-space: break-spaces; line-height: 1.5; max-width: 200px; text-align: center; width: 200px;"><span class="nodeLabel"><p>SVG generated at build time</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-HTML-14" transform="translate(959.8515625, 151)"><rect class="basic label-container" style="" x="-98.1796875" y="-27" width="196.359375" height="54"></rect><g class="label" style="" transform="translate(-68.1796875, -12)"><rect></rect><foreignObject width="136.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Static HTML output</p></span></div></foreignObject></g></g></g></g></g></svg></div>
+<p><em>Mermaid rendering paths in Astro: client-side during development, build-time SVG generation for production.</em></p>
+<h2 id="why-mermaid-rendering-matters-in-a-static-astro-site">Why Mermaid Rendering Matters in a Static Astro Site</h2>
+<p>Mermaid is a powerful way to express ideas visually:</p>
+<ul>
+<li>architecture diagrams</li>
+<li>flowcharts</li>
+<li>system interactions</li>
+<li>mental models</li>
+</ul>
+<p>In an Astro project—especially one that is fully precompiled into static pages—how Mermaid diagrams are rendered has a direct impact on:</p>
+<ul>
+<li>user experience</li>
+<li>perceived performance</li>
+<li>layout stability (flash / shift)</li>
+<li>long-term maintainability</li>
+</ul>
+<p>At first glance, adding Mermaid support to Astro looks trivial. In practice, once you care about build-time output and dev/prod parity, the details start to matter.</p>
+<p>This post documents my journey of rendering Mermaid diagrams at build time in Astro, and what I learned along the way.</p>
+<hr>
+<h2 id="step-1-starting-with-astro-mermaid">Step 1: Starting With <code>astro-mermaid</code></h2>
+<p>The most straightforward option is <code>astro-mermaid</code>.</p>
+<p>Setup is simple:</p>
+<ul>
+<li>install the integration</li>
+<li>enable it in <code>astro.config</code></li>
+<li>write Mermaid code blocks in Markdown</li>
+</ul>
+<p>This works well, especially during development.</p>
+<p>However, there is an important detail that is easy to miss:</p>
+<blockquote>
+<p><code>astro-mermaid</code> renders diagrams on the client.</p>
+</blockquote>
+<p>That means:</p>
+<ul>
+<li>Mermaid code is shipped to the browser</li>
+<li>SVGs are generated at runtime</li>
+<li>diagrams appear after the page loads</li>
+</ul>
+<hr>
+<h2 id="why-client-side-rendering-wasnt-ideal">Why Client-Side Rendering Wasn’t Ideal</h2>
+<p>My Astro site is fully precompiled into static HTML.</p>
+<p>In that context:</p>
+<ul>
+<li>there is no reason not to pre-render diagrams</li>
+<li>client-side Mermaid introduces a small but visible flash</li>
+<li>layout stability is slightly affected</li>
+<li>SEO and performance can be improved with static SVGs</li>
+</ul>
+<p>So the goal became clear:</p>
+<blockquote>
+<p>Precompile Mermaid diagrams into SVGs during <code>npm run build</code>.</p>
+</blockquote>
+<hr>
+<h2 id="step-2-switching-to-rehype-mermaid-for-build-time-rendering">Step 2: Switching to <code>rehype-mermaid</code> for Build-Time Rendering</h2>
+<p>To move Mermaid rendering into the build pipeline, I switched to <code>rehype-mermaid</code>.</p>
+<p>This plugin runs during Markdown processing and converts Mermaid code blocks directly into SVGs at build time.</p>
+<p>From a rendering perspective, this was exactly what I wanted:</p>
+<ul>
+<li>no client-side JavaScript</li>
+<li>no runtime diagram generation</li>
+<li>fully static output</li>
+</ul>
+<p>Theme configuration was also straightforward, and could be aligned with what I used in development.</p>
+<p>Visually, however, something still felt off.</p>
+<hr>
+<h2 id="the-subtle-problem-structural-differences">The Subtle Problem: Structural Differences</h2>
+<p>Even with the same Mermaid theme, development and production output did not look the same.</p>
+<p>The reason turned out not to be styling, but structure.</p>
+<h3 id="astro-mermaid-output-development"><code>astro-mermaid</code> output (development)</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&#x3C;</span><span style="color:#F7768E">pre</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mermaid</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">></span></span>
+<span class="line"><span style="color:#BA3C97">  &#x3C;</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span><span style="color:#9AA5CE">...</span><span style="color:#BA3C97">&#x3C;/</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span></span>
+<span class="line"><span style="color:#BA3C97">&#x3C;/</span><span style="color:#F7768E">pre</span><span style="color:#BA3C97">></span></span></code></pre>
+<h3 id="rehype-mermaid-output-build"><code>rehype-mermaid</code> output (build)</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&#x3C;</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span><span style="color:#9AA5CE">...</span><span style="color:#BA3C97">&#x3C;/</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span></span></code></pre>
+<p>That missing wrapper is significant.</p>
+<p>The <code>&#x3C;pre></code> element in development:</p>
+<ul>
+<li>naturally centers the SVG</li>
+<li>provides a container for background and spacing</li>
+<li>makes diagrams feel visually intentional</li>
+</ul>
+<p>With build-time rendering, I was left with bare SVGs:</p>
+<ul>
+<li>left-aligned</li>
+<li>no background</li>
+<li>awkward spacing</li>
+</ul>
+<p>At this point it became clear that this was not a theming issue, but a DOM structure issue.</p>
+<hr>
+<h2 id="step-3-fixing-structure-instead-of-fighting-css">Step 3: Fixing Structure Instead of Fighting CSS</h2>
+<p>Rather than trying to force SVG layout using CSS alone, I chose to fix the structure at the source.</p>
+<p>The idea was simple:</p>
+<ul>
+<li>let <code>rehype-mermaid</code> generate the SVG</li>
+<li>post-process the AST</li>
+<li>wrap each Mermaid SVG in a container</li>
+</ul>
+<h3 id="desired-output">Desired Output</h3>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#BA3C97">&#x3C;</span><span style="color:#F7768E">div</span><span style="color:#BB9AF7"> class</span><span style="color:#89DDFF">=</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mermaid</span><span style="color:#89DDFF">"</span><span style="color:#BA3C97">></span></span>
+<span class="line"><span style="color:#BA3C97">  &#x3C;</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span><span style="color:#9AA5CE">...</span><span style="color:#BA3C97">&#x3C;/</span><span style="color:#F7768E">svg</span><span style="color:#BA3C97">></span></span>
+<span class="line"><span style="color:#BA3C97">&#x3C;/</span><span style="color:#F7768E">div</span><span style="color:#BA3C97">></span></span></code></pre>
+<p>Now:</p>
+<ul>
+<li>layout and presentation belong to the wrapper</li>
+<li>the SVG remains untouched</li>
+<li>development and build outputs are conceptually aligned</li>
+</ul>
+<hr>
+<h2 id="step-4-writing-a-small-rehype-wrapper-plugin">Step 4: Writing a Small Rehype Wrapper Plugin</h2>
+<p>I implemented a small rehype plugin that runs after <code>rehype-mermaid</code>.</p>
+<p>What it does:</p>
+<ul>
+<li>walks the HAST tree</li>
+<li>finds <code>&#x3C;svg></code> elements whose <code>id</code> starts with <code>mermaid-</code></li>
+<li>replaces them with a wrapper element</li>
+</ul>
+<p>Conceptually:</p>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#7AA2F7">visit</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">tree</span><span style="color:#89DDFF">,</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">element</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span><span style="color:#9ABDF5"> (</span><span style="color:#E0AF68">node</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> index</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> parent</span><span style="color:#9ABDF5">)</span><span style="color:#BB9AF7"> =></span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#BB9AF7">  if</span><span style="color:#9ABDF5"> (</span><span style="color:#C0CAF5">node</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">tagName</span><span style="color:#BB9AF7"> ===</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">svg</span><span style="color:#89DDFF">"</span><span style="color:#BB9AF7"> &#x26;&#x26;</span><span style="color:#C0CAF5"> node</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">properties</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">id</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">startsWith</span><span style="color:#9ABDF5">(</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mermaid-</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">)) {</span></span>
+<span class="line"><span style="color:#C0CAF5">    parent</span><span style="color:#89DDFF">.</span><span style="color:#7DCFFF">children</span><span style="color:#9ABDF5">[</span><span style="color:#7DCFFF">index</span><span style="color:#9ABDF5">] </span><span style="color:#89DDFF">=</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#73DACA">      type</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">element</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      tagName</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">div</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      properties</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> { </span><span style="color:#73DACA">className</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">mermaid</span><span style="color:#89DDFF">"</span><span style="color:#9ABDF5">] }</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#73DACA">      children</span><span style="color:#89DDFF">:</span><span style="color:#9ABDF5"> [</span><span style="color:#7DCFFF">node</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#9ABDF5">    }</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">  }</span></span>
+<span class="line"><span style="color:#9ABDF5">})</span><span style="color:#89DDFF">;</span></span></code></pre>
+<p>This transformation happens entirely at build time, with no client-side cost.</p>
+<hr>
+<h2 id="step-5-styling-the-wrapper-not-the-svg">Step 5: Styling the Wrapper (Not the SVG)</h2>
+<p>Once the wrapper exists, styling becomes trivial and intentional.</p>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="css"><code><span class="line"><span style="color:#0DB9D7">div</span><span style="color:#E0AF68">.</span><span style="color:#9ECE6A">mermaid</span><span style="color:#9ABDF5"> {</span></span>
+<span class="line"><span style="color:#7AA2F7">  width</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 100</span><span style="color:#F7768E">%</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  display</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> flex</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  justify-content</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> center</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  align-items</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> center</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  background</span><span style="color:#89DDFF">:</span><span style="color:#0DB9D7"> rgba</span><span style="color:#9ABDF5">(</span><span style="color:#FF9E64">0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">,</span><span style="color:#FF9E64"> 0.02</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  padding</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 24</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  border-radius</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 16</span><span style="color:#F7768E">px</span><span style="color:#89DDFF">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#7AA2F7">  margin</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> 32</span><span style="color:#F7768E">px</span><span style="color:#FF9E64"> 0</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#7AA2F7">  overflow-x</span><span style="color:#89DDFF">:</span><span style="color:#FF9E64"> auto</span><span style="color:#89DDFF">;</span></span>
+<span class="line"><span style="color:#9ABDF5">}</span></span></code></pre>
+<p>Key decision:</p>
+<ul>
+<li>the SVG itself is never styled</li>
+<li>the wrapper owns layout, spacing, and background</li>
+<li>Mermaid output remains pure and future-proof</li>
+</ul>
+<hr>
+<h2 id="final-setup-development-vs-production">Final Setup: Development vs Production</h2>
+<p>The final setup looks like this:</p>
+<h3 id="development">Development</h3>
+<ul>
+<li><code>astro-mermaid</code></li>
+<li>fast feedback loop</li>
+<li>client-side rendering is acceptable</li>
+</ul>
+<h3 id="production-build">Production Build</h3>
+<ul>
+<li><code>rehype-mermaid</code></li>
+<li>custom wrapper plugin</li>
+<li>static SVG output</li>
+<li>no flash, better UX</li>
+</ul>
+<p>This split provides a good balance between developer experience and production performance.</p>
+<hr>
+<h2 id="final-takeaway">Final Takeaway</h2>
+<p>What surprised me most in this process was that:</p>
+<ul>
+<li>the hard part wasn’t Mermaid itself</li>
+<li>it wasn’t theming</li>
+<li>it was structure</li>
+</ul>
+<p>Once the DOM structure was correct, everything else became simple.</p>
+<p>If you are using Astro as a static-first framework, I would strongly recommend:</p>
+<ul>
+<li>rendering diagrams at build time</li>
+<li>fixing structure instead of compensating with CSS</li>
+<li>treating diagrams as first-class build artifacts</li>
+</ul>
+<p>Hopefully this saves someone else a few rounds of trial and error.</p> </div>  </div> </section>    </main>  </body> </html>

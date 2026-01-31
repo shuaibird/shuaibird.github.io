@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Engineering — shuaibird</title><link rel="stylesheet" href="/_astro/index.QE75l8cM.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-list[data-astro-cid-vxnjgjqp]{display:grid;gap:14px}.post-item[data-astro-cid-vxnjgjqp] a[data-astro-cid-vxnjgjqp]{display:grid;gap:6px;padding:12px 14px;border-radius:14px;background:var(--surface-glass);border:1px solid var(--color-border)}.post-title[data-astro-cid-vxnjgjqp]{font-weight:600}.post-meta[data-astro-cid-vxnjgjqp]{display:grid;gap:4px;font-size:.9rem;color:var(--color-text-muted)}.post-desc[data-astro-cid-vxnjgjqp]{color:var(--color-text-muted)}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" data-astro-cid-ctg3m53h> Every Bit of AI </a><a href="/tech/engineering/" class="active" data-astro-cid-ctg3m53h> Engineering </a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Tech Series</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Engineering</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>Build notes on systems, craft, and shipping.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k> <h2 class="section-title" data-astro-cid-jt2j4m2k>Posts</h2> <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-list" data-astro-cid-vxnjgjqp> <article class="post-item" data-astro-cid-vxnjgjqp> <a href="/tech/engineering/rendering-mermaid-diagrams-in-astro/" data-astro-cid-vxnjgjqp> <div class="post-title" data-astro-cid-vxnjgjqp>Rendering Mermaid Diagrams in Astro: From Client-Side to Build-Time</div> <div class="post-meta" data-astro-cid-vxnjgjqp> <span data-astro-cid-vxnjgjqp>Jan 31, 2026</span> <span class="post-desc" data-astro-cid-vxnjgjqp>A personal journey of enabling Mermaid rendering in an Astro project, and why build-time SVG generation matters.</span> </div> </a> </article> </div>  </div> </section>    </main>  </body> </html>

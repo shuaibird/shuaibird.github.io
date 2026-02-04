@@ -132,6 +132,10 @@ const isDev = import.meta.env.DEV;
           opacity 0.2s ease;
       }
 
+      :global(a, button, summary, [role="button"]) {
+        -webkit-tap-highlight-color: transparent;
+      }
+
       :global(a:hover) {
         color: var(--color-accent);
       }

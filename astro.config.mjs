@@ -3,6 +3,8 @@ import mermaid from 'astro-mermaid';
 import rehypeMermaid from 'rehype-mermaid';
 import themeTokyoNight from '@shikijs/themes/tokyo-night';
 import rehypeWrapMermaid from './src/plugins/rehype-wrap-mermaid';
+import remarkMermaidResponsive from './src/plugins/remark-mermaid-responsive';
+import rehypeMermaidResponsive from './src/plugins/rehype-mermaid-responsive';
 
 const isDev = process.env.NODE_ENV === 'development';
 const mermaidTheme = 'forest';
@@ -26,9 +28,11 @@ export default defineConfig({
     syntaxHighlight: {
       excludeLangs: ['mermaid'],
     },
+    remarkPlugins: [remarkMermaidResponsive],
     rehypePlugins: isDev
       ? []
       : [
+          rehypeMermaidResponsive,
           [
             rehypeMermaid,
             {

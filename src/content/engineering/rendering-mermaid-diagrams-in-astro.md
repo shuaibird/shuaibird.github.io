@@ -4,7 +4,7 @@ description: "A personal journey of enabling Mermaid rendering in an Astro proje
 date: 2026-01-31
 ---
 
-```mermaid
+```mermaid responsive
 flowchart LR
     MD[Markdown with Mermaid]
 

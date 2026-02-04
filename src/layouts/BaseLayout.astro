@@ -1,9 +1,11 @@
 ---
 import SiteHead from "../components/SiteHead.astro";
 import SiteHeader from "../components/SiteHeader.astro";
+import mermaidResponsiveDevUrl from "../scripts/mermaid-responsive-dev.ts?url";
 
 const { title = "shuaibird — thinking, making, moving", showProgress = false } =
   Astro.props;
+const isDev = import.meta.env.DEV;
 ---
 
 <html lang="en">
@@ -16,6 +18,8 @@ const { title = "shuaibird — thinking, making, moving", showProgress = false }
     <main class="container">
       <slot />
     </main>
+
+    {isDev && <script type="module" src={mermaidResponsiveDevUrl} />}
 
     <style>
       :global(html, body) {
@@ -175,6 +179,33 @@ const { title = "shuaibird — thinking, making, moving", showProgress = false }
 
         margin: 32px 0;
         overflow-x: auto;
+      }
+
+      /* === Mermaid responsive wrappers (build) === */
+      :global(.mermaid-responsive) {
+        margin: 32px 0;
+      }
+
+      :global(.mermaid-responsive__item) {
+        width: 100%;
+      }
+
+      :global(.mermaid-responsive__item--tb) {
+        display: none;
+      }
+
+      :global(.mermaid-responsive .mermaid) {
+        margin: 0;
+      }
+
+      @media (max-width: 720px) {
+        :global(.mermaid-responsive__item--lr) {
+          display: none;
+        }
+
+        :global(.mermaid-responsive__item--tb) {
+          display: block;
+        }
       }
     </style>
   </body>

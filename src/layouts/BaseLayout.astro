@@ -147,6 +147,21 @@ const { title = "shuaibird — thinking, making, moving", showProgress = false }
         padding: 64px var(--container-padding) 96px;
       }
 
+      :global(pre.astro-code) {
+        font-size: 0.95rem;
+        line-height: 1.55;
+        padding: 1rem 1.2rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+      }
+
+      @media (max-width: 720px) {
+        :global(pre.astro-code) {
+          font-size: 0.88rem;
+        }
+      }
+
       /* === Mermaid diagrams (build wrapper) === */
       :global(div.mermaid) {
         max-width: 100%;

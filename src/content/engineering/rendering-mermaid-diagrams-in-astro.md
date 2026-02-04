@@ -222,6 +222,82 @@ Key decision:
 
 ---
 
+## Bonus: Opt-in Responsive Mermaid Diagrams (LR ↔ TB)
+
+One extra improvement I added after this post: an **opt-in** `responsive` meta tag for Mermaid code blocks.
+
+### Usage
+
+````
+```mermaid responsive
+flowchart LR
+  A --> B
+````
+
+The idea is simple:
+
+- **Desktop / wide screens**: keep `flowchart LR` (left-to-right)
+- **Mobile / narrow screens**: switch to `flowchart TB` (top-to-bottom)
+
+This keeps diagrams readable without manually maintaining two versions.
+
+### How it works
+
+I keep it _opt-in_ so most diagrams stay unchanged.
+
+- A small **remark** plugin (`remark-mermaid-responsive`) detects ` ```mermaid responsive ` blocks and injects a marker line at the top of the Mermaid source:
+  - `%% mermaid-responsive %%`
+
+That marker then drives two different implementations:
+
+#### Development (client-side, `astro-mermaid`)
+
+Because dev uses client-side rendering, I added a tiny module script that:
+
+- detects `pre.mermaid` blocks containing the marker
+- replaces only the direction (`LR` ↔ `TB`) based on a breakpoint
+- re-renders on resize / theme change / Astro page swap
+
+This keeps the dev experience fast while still letting diagrams adapt responsively.
+
+#### Production (build-time, `rehype-mermaid`)
+
+For production builds, client-side re-rendering is unnecessary.
+
+Instead, a **rehype** plugin (`rehype-mermaid-responsive`) duplicates the Mermaid code block _before_ `rehype-mermaid` runs:
+
+- one copy forced to `LR`
+- one copy forced to `TB`
+
+It wraps them like this:
+
+```html
+<div class="mermaid-responsive">
+  <div class="mermaid-responsive__item mermaid-responsive__item--lr">
+    <pre><code class="language-mermaid">...</code></pre>
+  </div>
+  <div class="mermaid-responsive__item mermaid-responsive__item--tb">
+    <pre><code class="language-mermaid">...</code></pre>
+  </div>
+</div>
+```
+
+Then CSS handles which one is visible:
+
+- show `--lr` by default
+- switch to `--tb` under the breakpoint
+
+That gives me **responsive diagrams with zero runtime cost** in production.
+
+### Takeaway
+
+This felt like the same lesson as the wrapper fix:
+
+- don’t fight the output with CSS alone
+- instead, make the structure / pipeline produce what you actually want
+
+With an opt-in marker, I can keep Mermaid code clean while still getting responsive behavior where it matters.
+
 ## Final Setup: Development vs Production
 
 The final setup looks like this:

@@ -39,7 +39,7 @@ export default defineConfig({
         ],
     shikiConfig: {
       theme: themeTokyoNight,
-      wrap: true,
+      wrap: false,
     },
   },
 });

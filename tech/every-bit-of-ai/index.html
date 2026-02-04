@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Every Bit of AI — shuaibird</title><link rel="stylesheet" href="/_astro/index.QE75l8cM.css">
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Every Bit of AI — shuaibird</title><link rel="stylesheet" href="/_astro/index.BxKwS4N9.css">
 <style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
 .post-list[data-astro-cid-vxnjgjqp]{display:grid;gap:14px}.post-item[data-astro-cid-vxnjgjqp] a[data-astro-cid-vxnjgjqp]{display:grid;gap:6px;padding:12px 14px;border-radius:14px;background:var(--surface-glass);border:1px solid var(--color-border)}.post-title[data-astro-cid-vxnjgjqp]{font-weight:600}.post-meta[data-astro-cid-vxnjgjqp]{display:grid;gap:4px;font-size:.9rem;color:var(--color-text-muted)}.post-desc[data-astro-cid-vxnjgjqp]{color:var(--color-text-muted)}
 </style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" class="active" data-astro-cid-ctg3m53h> Every Bit of AI </a><a href="/tech/engineering/" data-astro-cid-ctg3m53h> Engineering </a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
@@ -64,4 +64,41 @@ Menu
 
       setNavOpen(false);
     });
+
+    const progressEnabled =
+      header instanceof HTMLElement &&
+      header.classList.contains("has-progress");
+
+    if (progressEnabled && header instanceof HTMLElement) {
+      let ticking = false;
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const maxScroll = doc.scrollHeight - window.innerHeight;
+        const progress =
+          maxScroll <= 0 ? 0 : Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+
+        header.style.setProperty("--header-progress", progress.toFixed(4));
+        header.style.setProperty(
+          "--header-progress-percent",
+          `${(progress * 100).toFixed(2)}%`,
+        );
+        header.classList.toggle("progress-ready", maxScroll > 0);
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("load", updateProgress);
+    }
   </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Tech Series</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Every Bit of AI</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>Small, steady notes on what the tools are becoming.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k> <h2 class="section-title" data-astro-cid-jt2j4m2k>Posts</h2> <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-list" data-astro-cid-vxnjgjqp> <article class="post-item" data-astro-cid-vxnjgjqp> <a href="/tech/every-bit-of-ai/demystifying-ai-tools/" data-astro-cid-vxnjgjqp> <div class="post-title" data-astro-cid-vxnjgjqp>Demystifying AI Tools</div> <div class="post-meta" data-astro-cid-vxnjgjqp> <span data-astro-cid-vxnjgjqp>Jan 30, 2026</span> <span class="post-desc" data-astro-cid-vxnjgjqp>What “tools” really are in AI systems, why they exist, and what’s actually happening when a model “calls” one.</span> </div> </a> </article><article class="post-item" data-astro-cid-vxnjgjqp> <a href="/tech/every-bit-of-ai/layers-of-the-ai-stack/" data-astro-cid-vxnjgjqp> <div class="post-title" data-astro-cid-vxnjgjqp>Layers of the AI Stack</div> <div class="post-meta" data-astro-cid-vxnjgjqp> <span data-astro-cid-vxnjgjqp>Jan 29, 2026</span> <span class="post-desc" data-astro-cid-vxnjgjqp>What LLMs, RAG, agents, and multi-agent systems really are — and why they appeared in this order.</span> </div> </a> </article><article class="post-item" data-astro-cid-vxnjgjqp> <a href="/tech/every-bit-of-ai/the-illusion-of-ai-memory/" data-astro-cid-vxnjgjqp> <div class="post-title" data-astro-cid-vxnjgjqp>The Illusion of AI Memory</div> <div class="post-meta" data-astro-cid-vxnjgjqp> <span data-astro-cid-vxnjgjqp>Jan 28, 2026</span> <span class="post-desc" data-astro-cid-vxnjgjqp>Why large language models feel like they remember — and why they actually don’t.</span> </div> </a> </article> </div>  </div> </section>    </main>  </body> </html>

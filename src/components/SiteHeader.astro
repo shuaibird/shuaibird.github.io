@@ -397,21 +397,22 @@ const isActiveLink = (href: string) => {
         background-color: var(--color-surface);
         background-image: var(--surface-nav);
         background-size: cover;
-        opacity: 0;
+        visibility: hidden;
         pointer-events: none;
-        transform: translateY(-8px);
+        transform: translate3d(0, -4px, 0);
         transition:
-          opacity 0.2s ease,
-          transform 0.2s ease;
+          transform 0.22s ease-out,
+          visibility 0s linear 0.22s;
         z-index: 20;
         border-radius: 0;
         box-shadow: none;
       }
 
       .nav-open .nav {
-        opacity: 1;
+        visibility: visible;
         pointer-events: auto;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
+        transition: transform 0.22s ease-out;
       }
 
       .nav-open .nav-backdrop {

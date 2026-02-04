@@ -2,7 +2,8 @@
 import SiteHead from "../components/SiteHead.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 
-const { title = "shuaibird — thinking, making, moving" } = Astro.props;
+const { title = "shuaibird — thinking, making, moving", showProgress = false } =
+  Astro.props;
 ---
 
 <html lang="en">
@@ -10,7 +11,7 @@ const { title = "shuaibird — thinking, making, moving" } = Astro.props;
     <SiteHead title={title} />
   </head>
   <body>
-    <SiteHeader />
+    <SiteHeader showProgress={showProgress} />
 
     <main class="container">
       <slot />

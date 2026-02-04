@@ -37,7 +37,7 @@ const formatter = new Intl.DateTimeFormat("en-US", {
 });
 ---
 
-<BaseLayout title={`${post.data.title} — ${series.title}`}>
+<BaseLayout title={`${post.data.title} — ${series.title}`} showProgress>
   <PageHero
     variant="solo"
     kicker={formatter.format(post.data.date)}

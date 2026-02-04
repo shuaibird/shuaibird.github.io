@@ -1,6 +1,7 @@
 ---
 import { techSeries } from "../data/techSeries";
 
+const { showProgress = false } = Astro.props;
 const pathname = Astro.url.pathname;
 const isActiveSection = (href: string) => pathname.startsWith(href);
 const isActiveLink = (href: string) => {
@@ -9,7 +10,7 @@ const isActiveLink = (href: string) => {
 };
 ---
 
-<header class="site-header">
+<header class="site-header" class:list={{ "has-progress": showProgress }}>
   <div class="container header-grid">
     <div class="brand">
       <a href="/">shuaibird</a>
@@ -122,6 +123,43 @@ const isActiveLink = (href: string) => {
 
       setNavOpen(false);
     });
+
+    const progressEnabled =
+      header instanceof HTMLElement &&
+      header.classList.contains("has-progress");
+
+    if (progressEnabled && header instanceof HTMLElement) {
+      let ticking = false;
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const maxScroll = doc.scrollHeight - window.innerHeight;
+        const progress =
+          maxScroll <= 0 ? 0 : Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+
+        header.style.setProperty("--header-progress", progress.toFixed(4));
+        header.style.setProperty(
+          "--header-progress-percent",
+          `${(progress * 100).toFixed(2)}%`,
+        );
+        header.classList.toggle("progress-ready", maxScroll > 0);
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("load", updateProgress);
+    }
   </script>
 
   <style>
@@ -131,6 +169,14 @@ const isActiveLink = (href: string) => {
       --header-height: 80px;
       --nav-control-height: 32px;
       --nav-control-border: 1px;
+      --header-progress: 0;
+      --header-progress-percent: 0%;
+      --header-progress-gradient: linear-gradient(
+        90deg,
+        rgba(12, 148, 138, 0.55),
+        rgba(18, 154, 144, 0.99),
+        rgba(255, 155, 95, 1)
+      );
       background: var(--surface-glass);
       border-bottom: 1px solid var(--color-border);
       backdrop-filter: blur(14px);
@@ -150,6 +196,40 @@ const isActiveLink = (href: string) => {
         rgba(255, 219, 190, 0.6)
       );
       opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .site-header::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px;
+      height: 4px;
+      background: var(--header-progress-gradient);
+      opacity: 1;
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      transition: none;
+      pointer-events: none;
+      will-change: clip-path;
+    }
+
+    .site-header.progress-ready::before {
+      clip-path: polygon(
+        0 0,
+        var(--header-progress-percent, 0%) 0,
+        var(--header-progress-percent, 0%) 100%,
+        0 100%
+      );
+      transition: clip-path 0.12s ease-out;
+    }
+
+    .site-header:not(.has-progress)::before {
+      display: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .site-header::before {
+        transition: none;
+      }
     }
 
     .header-grid {

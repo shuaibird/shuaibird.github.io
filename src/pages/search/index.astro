@@ -1,0 +1,304 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionCard from "../../components/SectionCard.astro";
+
+const isDev = import.meta.env.DEV;
+const baseUrl = import.meta.env.BASE_URL ?? "/";
+const pagefindBase = `${baseUrl}pagefind/`;
+---
+
+<BaseLayout title="Search — shuaibird">
+  <PageHero
+    kicker="Search"
+    title="Find posts across the universe"
+    subtitle="Search across every post, with AI-boosted keywords and phrases."
+  />
+
+  <SectionCard title="Search">
+    <form class="search-form" role="search" autocomplete="off">
+      <label class="sr-only" for="search-input">Search posts</label>
+      <input
+        id="search-input"
+        class="search-input"
+        type="search"
+        name="q"
+        placeholder="Search posts, topics, or phrases"
+        autocomplete="off"
+      />
+    </form>
+    <div class="search-status" aria-live="polite"></div>
+    <div class="search-results" data-empty="true"></div>
+  </SectionCard>
+
+  <script is:inline define:vars={{ isDev, pagefindBase }}>
+    const form = document.querySelector(".search-form");
+    const input = document.querySelector(".search-input");
+    const statusEl = document.querySelector(".search-status");
+    const resultsEl = document.querySelector(".search-results");
+
+    let pagefindPromise = null;
+    let activeSearchId = 0;
+
+    const setStatus = (message) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+    };
+
+    const setResultsEmpty = (isEmpty) => {
+      if (!resultsEl) return;
+      resultsEl.dataset.empty = isEmpty ? "true" : "false";
+    };
+
+    const loadPagefind = async () => {
+      if (pagefindPromise) return pagefindPromise;
+      pagefindPromise = import(`${pagefindBase}pagefind.js`)
+        .then(async (module) => {
+          if (module?.options) {
+            await module.options({ basePath: pagefindBase });
+          }
+          return module;
+        })
+        .catch(() => null);
+      return pagefindPromise;
+    };
+
+    const updateUrl = (query) => {
+      const url = new URL(window.location.href);
+      if (query) {
+        url.searchParams.set("q", query);
+      } else {
+        url.searchParams.delete("q");
+      }
+      window.history.replaceState({}, "", url);
+    };
+
+    const renderResults = (entries) => {
+      if (!resultsEl) return;
+      resultsEl.innerHTML = "";
+
+      if (!entries.length) {
+        setResultsEmpty(true);
+        resultsEl.innerHTML =
+          '<div class="search-empty">No matches yet. Try a different phrase.</div>';
+        return;
+      }
+
+      setResultsEmpty(false);
+      const fragment = document.createDocumentFragment();
+
+      for (const entry of entries) {
+        const item = document.createElement("article");
+        item.className = "search-item";
+
+        const categoryLine = document.createElement("div");
+        categoryLine.className = "search-category";
+        const series = entry?.meta?.series;
+        const collection = entry?.meta?.collection;
+
+        if (series) {
+          categoryLine.textContent = series;
+        } else if (collection) {
+          categoryLine.textContent = collection;
+        }
+
+        const titleLink = document.createElement("a");
+        titleLink.className = "search-title";
+        titleLink.href = entry.url;
+        titleLink.textContent = entry?.meta?.title || entry?.title || entry.url;
+
+        const summary = document.createElement("p");
+        summary.className = "search-summary";
+
+        if (entry?.meta?.summary) {
+          summary.textContent = entry.meta.summary;
+        } else if (entry?.excerpt) {
+          summary.innerHTML = entry.excerpt;
+        }
+
+        if (categoryLine.textContent) {
+          item.appendChild(categoryLine);
+        }
+        item.appendChild(titleLink);
+        if (summary.textContent || summary.innerHTML) {
+          item.appendChild(summary);
+        }
+        fragment.appendChild(item);
+      }
+
+      resultsEl.appendChild(fragment);
+    };
+
+    const runSearch = async (query) => {
+      const searchId = ++activeSearchId;
+      const trimmed = query.trim();
+
+      updateUrl(trimmed);
+
+      if (!trimmed) {
+        setStatus("Type a query to search.");
+        renderResults([]);
+        return;
+      }
+
+      setStatus(`Searching "${trimmed}"...`);
+      const pagefind = await loadPagefind();
+
+      if (!pagefind) {
+        setStatus(
+          isDev
+            ? "Search is available after running a production build."
+            : "Search index missing. Run the build to generate it.",
+        );
+        return;
+      }
+
+      let response;
+      try {
+        response = await pagefind.search(trimmed);
+      } catch {
+        setStatus("Search index failed to load.");
+        if (resultsEl) resultsEl.innerHTML = "";
+        return;
+      }
+      if (searchId !== activeSearchId) return;
+
+      const results = await Promise.all(
+        response.results.slice(0, 12).map((result) => result.data()),
+      );
+
+      renderResults(results);
+      setStatus(
+        response.results.length
+          ? `Showing ${results.length} of ${response.results.length} results for "${trimmed}".`
+          : "No results found.",
+      );
+    };
+
+    let debounceTimer = null;
+
+    const queueSearch = (value) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => runSearch(value), 320);
+    };
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+
+    input?.addEventListener("input", (event) => {
+      queueSearch(event.target.value || "");
+    });
+
+    const initialQuery =
+      new URLSearchParams(window.location.search).get("q") || "";
+    if (input) {
+      input.value = initialQuery;
+    }
+
+    runSearch(initialQuery);
+  </script>
+
+  <style>
+    .search-form {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(31, 31, 31, 0.12);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 14px 30px rgba(31, 28, 26, 0.1);
+    }
+
+    .search-input {
+      border: none;
+      background: transparent;
+      font-size: 1.05rem;
+      flex: 1;
+      min-width: 0;
+      outline: none;
+      color: var(--color-text);
+    }
+
+    .search-input::placeholder {
+      color: var(--color-text-muted);
+    }
+
+    .search-status {
+      margin-top: 16px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .search-results {
+      margin-top: 20px;
+      display: grid;
+      gap: 18px;
+    }
+
+    :global(.search-results[data-empty="true"]) {
+      display: block;
+    }
+
+    :global(.search-item) {
+      display: grid;
+      gap: 6px;
+      padding: 16px 18px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--color-border);
+      box-shadow: 0 10px 24px rgba(17, 17, 17, 0.06);
+    }
+
+    :global(.search-category) {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    :global(.search-title) {
+      display: block;
+      font-weight: 650;
+      font-size: clamp(1.35rem, 2vw, 1.55rem);
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      color: var(--color-accent);
+    }
+
+    :global(.search-title:hover) {
+      color: var(--color-accent-strong);
+    }
+
+    :global(.search-summary) {
+      margin: 0;
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    :global(.search-summary mark) {
+      background: rgba(240, 122, 90, 0.2);
+      color: var(--color-text);
+      padding: 0 2px;
+      border-radius: 4px;
+    }
+
+    :global(.search-empty) {
+      padding: 18px;
+      border-radius: 16px;
+      background: rgba(42, 100, 97, 0.06);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .search-form {
+        padding: 14px 16px;
+      }
+    }
+  </style>
+</BaseLayout>

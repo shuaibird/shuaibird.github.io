@@ -1,0 +1,34 @@
+{
+  "collection": "every-bit-of-ai",
+  "slug": "demystifying-ai-tools",
+  "title": "Demystifying AI Tools",
+  "description": "What “tools” really are in AI systems, why they exist, and what’s actually happening when a model “calls” one.",
+  "keywords": [
+    "toolcalling",
+    "functions",
+    "schema",
+    "json",
+    "validation",
+    "execution",
+    "apis",
+    "orchestration",
+    "security",
+    "grounding"
+  ],
+  "phrases": [
+    "llm tool calling",
+    "function schema contract",
+    "model requests code executes",
+    "structured json arguments",
+    "multiple tool calls",
+    "nested tool calls"
+  ],
+  "summary": "Explains what ai tools are, how tool calling works via schemas and json requests, and why execution stays in your code for safety and control.",
+  "contentHash": "2b0b5fe576a91a47d9450832977f5487493c5f5d6b37aae1d64159fd7da703d0",
+  "updatedAt": "2026-02-12T17:08:21.388Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}

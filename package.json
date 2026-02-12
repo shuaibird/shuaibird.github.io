@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run search:index",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier . --write",
@@ -12,10 +12,13 @@
     "lint": "eslint . --ext .js,.ts,.astro && stylelint \"**/*.css\" --allow-empty-input",
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix && stylelint \"**/*.css\" --fix --allow-empty-input",
     "check": "npm run format:check && npm run lint",
+    "search:meta": "node scripts/search/update-llm-meta.mjs",
+    "search:index": "npx pagefind --site dist",
     "postinstall": "npx playwright install --with-deps chromium",
     "prepare": "husky install"
   },
   "lint-staged": {
+    "src/content/**/*.{md,mdx}": "node scripts/search/update-llm-meta.mjs --stage",
     "*.{astro,js,ts,json,md,css,html}": "prettier --write",
     "*.{astro,js,ts}": "eslint --fix",
     "*.css": "stylelint --fix"
@@ -36,15 +39,19 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^1.5.0",
+    "dotenv": "^16.4.5",
     "hast": "^1.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "mdast": "^3.0.0",
+    "pagefind": "^1.3.0",
     "playwright": "^1.52.0",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
+    "proxy-from-env": "^1.1.0",
     "stylelint": "^17.0.0",
     "stylelint-config-standard": "^40.0.0",
-    "typescript-eslint": "^8.53.1"
+    "typescript-eslint": "^8.53.1",
+    "undici": "^7.0.0"
   }
 }

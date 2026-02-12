@@ -3,11 +3,39 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import PageHero from "../../../components/PageHero.astro";
 import SectionCard from "../../../components/SectionCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import fs from "node:fs/promises";
+import path from "node:path";
 import {
   techSeries,
   type TechSeries,
   type TechSeriesCollection,
 } from "../../../data/techSeries";
+
+const loadSearchMeta = async (
+  collection: string,
+  slug: string,
+  fallbackTitle: string,
+  fallbackDescription?: string,
+) => {
+  const metaPath = path.resolve(
+    "src/data/search/entries",
+    collection,
+    `${slug}.json`,
+  );
+
+  try {
+    const raw = await fs.readFile(metaPath, "utf8");
+    return JSON.parse(raw);
+  } catch {
+    return {
+      title: fallbackTitle,
+      description: fallbackDescription ?? "",
+      keywords: [],
+      phrases: [],
+      summary: fallbackDescription ?? "",
+    };
+  }
+};
 
 export async function getStaticPaths() {
   const seriesEntries = await Promise.all(
@@ -30,6 +58,18 @@ const { series, post } = Astro.props as {
   post: CollectionEntry<TechSeriesCollection>;
 };
 const { Content } = await post.render();
+const searchMeta = await loadSearchMeta(
+  post.collection,
+  post.slug,
+  post.data.title,
+  post.data.description,
+);
+const searchTerms = [
+  ...(Array.isArray(searchMeta?.keywords) ? searchMeta.keywords : []),
+  ...(Array.isArray(searchMeta?.phrases) ? searchMeta.phrases : []),
+]
+  .filter(Boolean)
+  .join(" ");
 const formatter = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "2-digit",
@@ -46,8 +86,40 @@ const formatter = new Intl.DateTimeFormat("en-US", {
   />
 
   <SectionCard>
-    <div class="post-body">
+    <div class="post-body" data-pagefind-body>
       <Content />
+      {
+        searchTerms && (
+          <div class="sr-only" aria-hidden="true">
+            {searchTerms}
+          </div>
+        )
+      }
+      <div class="sr-only" aria-hidden="true">
+        <span data-pagefind-meta="series">{series.title}</span>
+        <span data-pagefind-meta="collection">{post.collection}</span>
+        {
+          searchMeta?.summary && (
+            <span data-pagefind-meta="summary">{searchMeta.summary}</span>
+          )
+        }
+        {
+          Array.isArray(searchMeta?.keywords) &&
+            searchMeta.keywords.length > 0 && (
+              <span data-pagefind-meta="keywords">
+                {searchMeta.keywords.join(" ")}
+              </span>
+            )
+        }
+        {
+          Array.isArray(searchMeta?.phrases) &&
+            searchMeta.phrases.length > 0 && (
+              <span data-pagefind-meta="phrases">
+                {searchMeta.phrases.join(" ")}
+              </span>
+            )
+        }
+      </div>
     </div>
   </SectionCard>
 

@@ -1,0 +1,34 @@
+{
+  "collection": "every-bit-of-ai",
+  "slug": "the-illusion-of-ai-memory",
+  "title": "The Illusion of AI Memory",
+  "description": "Why large language models feel like they remember — and why they actually don’t.",
+  "keywords": [
+    "memory",
+    "stateless",
+    "context",
+    "prompt",
+    "tokens",
+    "probability",
+    "prediction",
+    "conversation",
+    "replay",
+    "function",
+    "interface"
+  ],
+  "phrases": [
+    "illusion of ai memory",
+    "large language model context",
+    "stateless model calls",
+    "context window limits",
+    "prompt replay technique"
+  ],
+  "summary": "Explains why chatbots seem to remember: llms are stateless and only predict next tokens from replayed conversation context within a limited window.",
+  "contentHash": "8bc5bef09b5159a678f05686d096c9fcf01ab983918ce308feb8a9cfeda619c1",
+  "updatedAt": "2026-02-12T17:08:26.941Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}

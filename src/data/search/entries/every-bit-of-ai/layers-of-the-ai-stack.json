@@ -1,0 +1,35 @@
+{
+  "collection": "every-bit-of-ai",
+  "slug": "layers-of-the-ai-stack",
+  "title": "Layers of the AI Stack",
+  "description": "What LLMs, RAG, agents, and multi-agent systems really are — and why they appeared in this order.",
+  "keywords": [
+    "llms",
+    "transformers",
+    "prompting",
+    "rag",
+    "langchain",
+    "orchestration",
+    "tooling",
+    "agents",
+    "mcp",
+    "multiagent",
+    "grounding"
+  ],
+  "phrases": [
+    "ai stack layers",
+    "retrieval augmented generation",
+    "prompt engineering techniques",
+    "tool using agents",
+    "model context protocol",
+    "multi agent systems"
+  ],
+  "summary": "Explains how llms evolved into prompting, rag, orchestration, tools, agents, mcp standardization, and multi-agent systems as each layer addressed limits of the previous one.",
+  "contentHash": "83a4c58431c284cd973de288c923e84764fac5fe1928b12c7a9dcb870adfd28b",
+  "updatedAt": "2026-02-12T17:08:24.376Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}

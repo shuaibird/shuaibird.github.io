@@ -1,0 +1,34 @@
+{
+  "collection": "engineering",
+  "slug": "rendering-mermaid-diagrams-in-astro",
+  "title": "Rendering Mermaid Diagrams in Astro: From Client-Side to Build-Time",
+  "description": "A personal journey of enabling Mermaid rendering in an Astro project, and why build-time SVG generation matters.",
+  "keywords": [
+    "astro",
+    "mermaid",
+    "diagrams",
+    "markdown",
+    "rehype",
+    "svg",
+    "buildtime",
+    "static",
+    "wrapper",
+    "hast"
+  ],
+  "phrases": [
+    "rendering mermaid diagrams",
+    "astro build time svg",
+    "client side mermaid rendering",
+    "rehype mermaid plugin",
+    "wrapping svg output",
+    "layout stability flash"
+  ],
+  "summary": "How to render Mermaid diagrams in Astro at build time as static SVGs, matching dev/prod structure via a rehype wrapper to avoid flash and improve layout stability.",
+  "contentHash": "35de8197827552964d5f754c46cec6894404817f1750c8285884e6cc964cc338",
+  "updatedAt": "2026-02-12T17:08:18.021Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>Search — shuaibird</title><link rel="stylesheet" href="/_astro/index.DSzYkaTZ.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.search-form[data-astro-cid-sqekdmok]{position:relative;display:flex;align-items:center;background:#fffffff5;border:1px solid rgba(31,31,31,.12);border-radius:16px;padding:16px 18px;box-shadow:0 14px 30px #1f1c1a1a}.search-input[data-astro-cid-sqekdmok]{border:none;background:transparent;font-size:1.05rem;flex:1;min-width:0;outline:none;color:var(--color-text)}.search-input[data-astro-cid-sqekdmok]::placeholder{color:var(--color-text-muted)}.search-status[data-astro-cid-sqekdmok]{margin-top:16px;font-weight:600;color:var(--color-text)}.search-results[data-astro-cid-sqekdmok]{margin-top:20px;display:grid;gap:18px}.search-results[data-empty=true]{display:block}.search-item{display:grid;gap:6px;padding:16px 18px 18px;border-radius:16px;background:#ffffffeb;border:1px solid var(--color-border);box-shadow:0 10px 24px #1111110f}.search-category{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted)}.search-title{display:block;font-weight:650;font-size:clamp(1.35rem,2vw,1.55rem);line-height:1.25;letter-spacing:-.015em;color:var(--color-accent)}.search-title:hover{color:var(--color-accent-strong)}.search-summary{margin:0;font-size:.98rem;font-weight:400;color:var(--color-text-muted);line-height:1.6}.search-summary mark{background:#f07a5a33;color:var(--color-text);padding:0 2px;border-radius:4px}.search-empty{padding:18px;border-radius:16px;background:#2a64610f;color:var(--color-text-muted);text-align:center}@media(max-width:720px){.search-form[data-astro-cid-sqekdmok]{padding:14px 16px}}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" data-astro-cid-ctg3m53h> Every Bit of AI </a><a href="/tech/engineering/" data-astro-cid-ctg3m53h> Engineering </a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> <a href="/search/" class="active" data-astro-cid-ctg3m53h>Search</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+
+    const progressEnabled =
+      header instanceof HTMLElement &&
+      header.classList.contains("has-progress");
+
+    if (progressEnabled && header instanceof HTMLElement) {
+      let ticking = false;
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const maxScroll = doc.scrollHeight - window.innerHeight;
+        const progress =
+          maxScroll <= 0 ? 0 : Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+
+        header.style.setProperty("--header-progress", progress.toFixed(4));
+        header.style.setProperty(
+          "--header-progress-percent",
+          `${(progress * 100).toFixed(2)}%`,
+        );
+        header.classList.toggle("progress-ready", maxScroll > 0);
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("load", updateProgress);
+    }
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Search</div> <h1 class="hero__title" data-astro-cid-s5hxusys>Find posts across the universe</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>Search across every post, with AI-boosted keywords and phrases.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k> <h2 class="section-title" data-astro-cid-jt2j4m2k>Search</h2> <div class="section-body" data-astro-cid-jt2j4m2k>  <form class="search-form" role="search" autocomplete="off" data-astro-cid-sqekdmok> <label class="sr-only" for="search-input" data-astro-cid-sqekdmok>Search posts</label> <input id="search-input" class="search-input" type="search" name="q" placeholder="Search posts, topics, or phrases" autocomplete="off" data-astro-cid-sqekdmok> </form> <div class="search-status" aria-live="polite" data-astro-cid-sqekdmok></div> <div class="search-results" data-empty="true" data-astro-cid-sqekdmok></div>  </div> </section>  <script>(function(){const isDev = false;
+const pagefindBase = "/pagefind/";
+
+    const form = document.querySelector(".search-form");
+    const input = document.querySelector(".search-input");
+    const statusEl = document.querySelector(".search-status");
+    const resultsEl = document.querySelector(".search-results");
+
+    let pagefindPromise = null;
+    let activeSearchId = 0;
+
+    const setStatus = (message) => {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+    };
+
+    const setResultsEmpty = (isEmpty) => {
+      if (!resultsEl) return;
+      resultsEl.dataset.empty = isEmpty ? "true" : "false";
+    };
+
+    const loadPagefind = async () => {
+      if (pagefindPromise) return pagefindPromise;
+      pagefindPromise = import(`${pagefindBase}pagefind.js`)
+        .then(async (module) => {
+          if (module?.options) {
+            await module.options({ basePath: pagefindBase });
+          }
+          return module;
+        })
+        .catch(() => null);
+      return pagefindPromise;
+    };
+
+    const updateUrl = (query) => {
+      const url = new URL(window.location.href);
+      if (query) {
+        url.searchParams.set("q", query);
+      } else {
+        url.searchParams.delete("q");
+      }
+      window.history.replaceState({}, "", url);
+    };
+
+    const renderResults = (entries) => {
+      if (!resultsEl) return;
+      resultsEl.innerHTML = "";
+
+      if (!entries.length) {
+        setResultsEmpty(true);
+        resultsEl.innerHTML =
+          '<div class="search-empty">No matches yet. Try a different phrase.</div>';
+        return;
+      }
+
+      setResultsEmpty(false);
+      const fragment = document.createDocumentFragment();
+
+      for (const entry of entries) {
+        const item = document.createElement("article");
+        item.className = "search-item";
+
+        const categoryLine = document.createElement("div");
+        categoryLine.className = "search-category";
+        const series = entry?.meta?.series;
+        const collection = entry?.meta?.collection;
+
+        if (series) {
+          categoryLine.textContent = series;
+        } else if (collection) {
+          categoryLine.textContent = collection;
+        }
+
+        const titleLink = document.createElement("a");
+        titleLink.className = "search-title";
+        titleLink.href = entry.url;
+        titleLink.textContent = entry?.meta?.title || entry?.title || entry.url;
+
+        const summary = document.createElement("p");
+        summary.className = "search-summary";
+
+        if (entry?.meta?.summary) {
+          summary.textContent = entry.meta.summary;
+        } else if (entry?.excerpt) {
+          summary.innerHTML = entry.excerpt;
+        }
+
+        if (categoryLine.textContent) {
+          item.appendChild(categoryLine);
+        }
+        item.appendChild(titleLink);
+        if (summary.textContent || summary.innerHTML) {
+          item.appendChild(summary);
+        }
+        fragment.appendChild(item);
+      }
+
+      resultsEl.appendChild(fragment);
+    };
+
+    const runSearch = async (query) => {
+      const searchId = ++activeSearchId;
+      const trimmed = query.trim();
+
+      updateUrl(trimmed);
+
+      if (!trimmed) {
+        setStatus("Type a query to search.");
+        renderResults([]);
+        return;
+      }
+
+      setStatus(`Searching "${trimmed}"...`);
+      const pagefind = await loadPagefind();
+
+      if (!pagefind) {
+        setStatus(
+          isDev
+            ? "Search is available after running a production build."
+            : "Search index missing. Run the build to generate it.",
+        );
+        return;
+      }
+
+      let response;
+      try {
+        response = await pagefind.search(trimmed);
+      } catch {
+        setStatus("Search index failed to load.");
+        if (resultsEl) resultsEl.innerHTML = "";
+        return;
+      }
+      if (searchId !== activeSearchId) return;
+
+      const results = await Promise.all(
+        response.results.slice(0, 12).map((result) => result.data()),
+      );
+
+      renderResults(results);
+      setStatus(
+        response.results.length
+          ? `Showing ${results.length} of ${response.results.length} results for "${trimmed}".`
+          : "No results found.",
+      );
+    };
+
+    let debounceTimer = null;
+
+    const queueSearch = (value) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => runSearch(value), 320);
+    };
+
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+    });
+
+    input?.addEventListener("input", (event) => {
+      queueSearch(event.target.value || "");
+    });
+
+    const initialQuery =
+      new URLSearchParams(window.location.search).get("q") || "";
+    if (input) {
+      input.value = initialQuery;
+    }
+
+    runSearch(initialQuery);
+  })();</script>   </main>   </body> </html>

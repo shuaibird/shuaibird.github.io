@@ -107,9 +107,23 @@ It only **asks**.
 
 ---
 
-## Demo: Tool Calling With Shopping Prices (Python)
+## Demo: Tool Calling With Shopping Prices
 
 Below is a minimal demo showing how tool calling works using a shopping-price example.
+
+<div style="width: 100%; margin: 1rem 0;">
+  <iframe
+    src="https://shuaibird-ai-tools-tool-calling-demo.hf.space"
+    style="width: 100%; height: 850px; border: 0;"
+    loading="lazy"
+  ></iframe>
+</div>
+
+You can ask:
+
+- "How much is AirPods Pro?"
+- "Compare AirPods Pro and Nintendo Switch"
+- "If AirPods Pro is under $250, also check Kindle Paperwhite."
 
 ---
 
@@ -152,7 +166,13 @@ price_function = {
         "properties": {
             "item_name": {
                 "type": "string",
-                "description": "Name of the shopping item."
+                "enum": [
+                    "AirPods Pro",
+                    "iPhone 15",
+                    "Nintendo Switch",
+                    "Kindle Paperwhite"
+                ],
+                "description": "Must be one of the supported catalog items."
             }
         },
         "required": ["item_name"],
@@ -288,7 +308,7 @@ def chat(message, history):
         tools=tools
     )
 
-    while response.choices[0].finish_reason == "tool_calls":
+    while response.choices[0].message.tool_calls:
         assistant_msg = response.choices[0].message
         tool_msgs = handle_tool_calls(assistant_msg)
 
@@ -325,4 +345,4 @@ They make AI systems:
 - production-safe
 
 The LLM reasons.  
-Your code decides.
+Your code executes (and enforces guardrails).

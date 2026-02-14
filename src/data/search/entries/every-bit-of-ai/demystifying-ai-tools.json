@@ -4,28 +4,29 @@
   "title": "Demystifying AI Tools",
   "description": "What “tools” really are in AI systems, why they exist, and what’s actually happening when a model “calls” one.",
   "keywords": [
-    "toolcalling",
-    "functions",
+    "tools",
+    "function",
     "schema",
     "json",
+    "arguments",
     "validation",
     "execution",
+    "guardrails",
     "apis",
-    "orchestration",
-    "security",
-    "grounding"
+    "databases",
+    "loop"
   ],
   "phrases": [
     "llm tool calling",
-    "function schema contract",
+    "schema driven functions",
     "model requests code executes",
     "structured json arguments",
     "multiple tool calls",
     "nested tool calls"
   ],
-  "summary": "Explains what ai tools are, how tool calling works via schemas and json requests, and why execution stays in your code for safety and control.",
-  "contentHash": "2b0b5fe576a91a47d9450832977f5487493c5f5d6b37aae1d64159fd7da703d0",
-  "updatedAt": "2026-02-12T17:08:21.388Z",
+  "summary": "Explains how ai tool calling works: models request functions via schemas and json args, while application code validates, executes, loops for multiple calls, and enforces guardrails.",
+  "contentHash": "144203141e8aeb99ed2b04067db049e444d0adf895eb06803fade9e7a821c82d",
+  "updatedAt": "2026-02-14T09:42:34.556Z",
   "source": "llm",
   "llm": {
     "provider": "openai-compatible",

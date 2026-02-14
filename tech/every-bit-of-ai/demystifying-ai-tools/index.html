@@ -167,8 +167,17 @@ Menu
 <p>The LLM never “runs” anything.<br>
 It only <strong>asks</strong>.</p>
 <hr>
-<h2 id="demo-tool-calling-with-shopping-prices-python">Demo: Tool Calling With Shopping Prices (Python)</h2>
+<h2 id="demo-tool-calling-with-shopping-prices">Demo: Tool Calling With Shopping Prices</h2>
 <p>Below is a minimal demo showing how tool calling works using a shopping-price example.</p>
+<div style="width: 100%; margin: 1rem 0;">
+  <iframe src="https://shuaibird-ai-tools-tool-calling-demo.hf.space" style="width: 100%; height: 850px; border: 0;" loading="lazy"></iframe>
+</div>
+<p>You can ask:</p>
+<ul>
+<li>“How much is AirPods Pro?”</li>
+<li>“Compare AirPods Pro and Nintendo Switch”</li>
+<li>“If AirPods Pro is under $250, also check Kindle Paperwhite.”</li>
+</ul>
 <hr>
 <h3 id="1-define-the-real-tool-function">1) Define the Real Tool Function</h3>
 <pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> json</span></span>
@@ -201,7 +210,13 @@ Deterministic. Testable. Auditable.</p>
 <span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">properties</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
 <span class="line"><span style="color:#89DDFF">            "</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> {</span></span>
 <span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">type</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">string</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
-<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">description</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Name of the shopping item.</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">enum</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span></span>
+<span class="line"><span style="color:#89DDFF">                    "</span><span style="color:#9ECE6A">AirPods Pro</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                    "</span><span style="color:#9ECE6A">iPhone 15</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                    "</span><span style="color:#9ECE6A">Nintendo Switch</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">,</span></span>
+<span class="line"><span style="color:#89DDFF">                    "</span><span style="color:#9ECE6A">Kindle Paperwhite</span><span style="color:#89DDFF">"</span></span>
+<span class="line"><span style="color:#89DDFF">                ],</span></span>
+<span class="line"><span style="color:#89DDFF">                "</span><span style="color:#9ECE6A">description</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">Must be one of the supported catalog items.</span><span style="color:#89DDFF">"</span></span>
 <span class="line"><span style="color:#89DDFF">            }</span></span>
 <span class="line"><span style="color:#89DDFF">        },</span></span>
 <span class="line"><span style="color:#89DDFF">        "</span><span style="color:#9ECE6A">required</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span><span style="color:#89DDFF"> [</span><span style="color:#89DDFF">"</span><span style="color:#9ECE6A">item_name</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">],</span></span>
@@ -308,7 +323,7 @@ It’s a <em>capability description</em>.</p>
 <span class="line"><span style="color:#E0AF68">        tools</span><span style="color:#89DDFF">=</span><span style="color:#C0CAF5">tools</span></span>
 <span class="line"><span style="color:#9ABDF5">    )</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#BB9AF7">    while</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">finish_reason </span><span style="color:#BB9AF7">==</span><span style="color:#89DDFF"> "</span><span style="color:#9ECE6A">tool_calls</span><span style="color:#89DDFF">"</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#BB9AF7">    while</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">tool_calls</span><span style="color:#89DDFF">:</span></span>
 <span class="line"><span style="color:#A9B1D6">        assistant_msg </span><span style="color:#89DDFF">=</span><span style="color:#A9B1D6"> response</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">choices</span><span style="color:#9ABDF5">[</span><span style="color:#FF9E64">0</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">.</span><span style="color:#A9B1D6">message</span></span>
 <span class="line"><span style="color:#A9B1D6">        tool_msgs </span><span style="color:#89DDFF">=</span><span style="color:#7AA2F7"> handle_tool_calls</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">assistant_msg</span><span style="color:#9ABDF5">)</span></span>
 <span class="line"></span>
@@ -339,4 +354,4 @@ It’s a <em>capability description</em>.</p>
 <li>production-safe</li>
 </ul>
 <p>The LLM reasons.<br>
-Your code decides.</p> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> toolcalling functions schema json validation execution apis orchestration security grounding llm tool calling function schema contract model requests code executes structured json arguments multiple tool calls nested tool calls </div> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> <span data-pagefind-meta="series" data-astro-cid-4o3ag3md>Every Bit of AI</span> <span data-pagefind-meta="collection" data-astro-cid-4o3ag3md>every-bit-of-ai</span> <span data-pagefind-meta="summary" data-astro-cid-4o3ag3md>Explains what ai tools are, how tool calling works via schemas and json requests, and why execution stays in your code for safety and control.</span> <span data-pagefind-meta="keywords" data-astro-cid-4o3ag3md> toolcalling functions schema json validation execution apis orchestration security grounding </span> <span data-pagefind-meta="phrases" data-astro-cid-4o3ag3md> llm tool calling function schema contract model requests code executes structured json arguments multiple tool calls nested tool calls </span> </div> </div>  </div> </section>    </main>   </body> </html>
+Your code executes (and enforces guardrails).</p> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> tools function schema json arguments validation execution guardrails apis databases loop llm tool calling schema driven functions model requests code executes structured json arguments multiple tool calls nested tool calls </div> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> <span data-pagefind-meta="series" data-astro-cid-4o3ag3md>Every Bit of AI</span> <span data-pagefind-meta="collection" data-astro-cid-4o3ag3md>every-bit-of-ai</span> <span data-pagefind-meta="summary" data-astro-cid-4o3ag3md>Explains how ai tool calling works: models request functions via schemas and json args, while application code validates, executes, loops for multiple calls, and enforces guardrails.</span> <span data-pagefind-meta="keywords" data-astro-cid-4o3ag3md> tools function schema json arguments validation execution guardrails apis databases loop </span> <span data-pagefind-meta="phrases" data-astro-cid-4o3ag3md> llm tool calling schema driven functions model requests code executes structured json arguments multiple tool calls nested tool calls </span> </div> </div>  </div> </section>    </main>   </body> </html>

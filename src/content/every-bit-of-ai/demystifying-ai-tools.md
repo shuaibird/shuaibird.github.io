@@ -111,10 +111,37 @@ It only **asks**.
 
 Below is a minimal demo showing how tool calling works using a shopping-price example.
 
-<div style="width: 100%; margin: 1rem 0;">
+<style>
+  .demo-iframe-wrap {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .demo-iframe {
+    width: 100%;
+    border: 0;
+    height: 850px;
+  }
+  @media (max-width: 643px) {
+    .demo-iframe {
+      height: 920px;
+    }
+  }
+  @media (max-width: 488px) {
+    .demo-iframe {
+      height: 1000px;
+    }
+  }
+  @media (max-width: 473px) {
+    .demo-iframe {
+      height: 1110px;
+    }
+  }
+</style>
+
+<div class="demo-iframe-wrap">
   <iframe
+    class="demo-iframe"
     src="https://shuaibird-ai-tools-tool-calling-demo.hf.space"
-    style="width: 100%; height: 850px; border: 0;"
     loading="lazy"
   ></iframe>
 </div>

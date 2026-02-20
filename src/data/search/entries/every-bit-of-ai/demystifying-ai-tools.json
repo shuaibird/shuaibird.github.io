@@ -7,26 +7,24 @@
     "tools",
     "function",
     "schema",
-    "json",
-    "arguments",
-    "validation",
+    "toolcalling",
+    "api",
     "execution",
     "guardrails",
-    "apis",
-    "databases",
-    "loop"
+    "validation",
+    "llm",
+    "grounding"
   ],
   "phrases": [
-    "llm tool calling",
-    "schema driven functions",
-    "model requests code executes",
+    "ai tool calling",
+    "llm requests code executes",
+    "function schema contract",
     "structured json arguments",
-    "multiple tool calls",
-    "nested tool calls"
+    "bounded inspectable execution"
   ],
-  "summary": "Explains how ai tool calling works: models request functions via schemas and json args, while application code validates, executes, loops for multiple calls, and enforces guardrails.",
-  "contentHash": "144203141e8aeb99ed2b04067db049e444d0adf895eb06803fade9e7a821c82d",
-  "updatedAt": "2026-02-14T09:42:34.556Z",
+  "summary": "Explains what ai tools are, how tool calling works via schemas and json requests, and why execution stays in your application for safety and control.",
+  "contentHash": "e9886f3f922b2d70f1d062eb4230c00584096e9ce99bf1b18df6558fb743a524",
+  "updatedAt": "2026-02-20T15:38:16.978Z",
   "source": "llm",
   "llm": {
     "provider": "openai-compatible",

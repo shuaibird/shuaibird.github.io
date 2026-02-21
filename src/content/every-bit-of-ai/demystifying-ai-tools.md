@@ -123,17 +123,17 @@ Below is a minimal demo showing how tool calling works using a shopping-price ex
   }
   @media (max-width: 643px) {
     .demo-iframe {
-      height: 920px;
+      height: 990px;
     }
   }
   @media (max-width: 488px) {
     .demo-iframe {
-      height: 1000px;
+      height: 1040px;
     }
   }
   @media (max-width: 473px) {
     .demo-iframe {
-      height: 1110px;
+      height: 1150px;
     }
   }
 </style>

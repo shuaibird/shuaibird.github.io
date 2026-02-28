@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-37fxchfa> <head><meta charset="utf-8"><!-- Favicons --><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.16.15"><title>RAG Works… Until Retrieval Fails — Every Bit of AI</title><link rel="stylesheet" href="/_astro/index.DSzYkaTZ.css">
+<style>.section-card[data-astro-cid-jt2j4m2k]{margin-top:32px;padding:22px 24px;border-radius:20px;background:#ffffffdb;border:1px solid rgba(31,31,31,.08);box-shadow:0 10px 24px #11111114}.section-title[data-astro-cid-jt2j4m2k]{margin-bottom:12px;font-size:1.1rem;text-transform:uppercase;letter-spacing:.18em;color:var(--color-text-muted)}
+.post-body[data-astro-cid-4o3ag3md] p{margin:0 0 1.1rem}.post-body[data-astro-cid-4o3ag3md] h2{margin-top:1.6rem}.post-body[data-astro-cid-4o3ag3md] a{color:var(--color-accent-strong);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;text-decoration-color:var(--color-accent-soft);transition:color .2s ease,text-decoration-color .2s ease,background-color .2s ease}.post-body[data-astro-cid-4o3ag3md] a:hover{color:var(--color-accent);text-decoration-color:var(--color-accent);background-color:var(--color-accent-ghost)}.post-body[data-astro-cid-4o3ag3md] a:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px;border-radius:4px}.post-body[data-astro-cid-4o3ag3md] blockquote{margin:1.2rem 0;padding:12px 18px;border-left:3px solid var(--color-accent);border-radius:12px;background:var(--surface-glass);color:var(--color-text)}.post-body[data-astro-cid-4o3ag3md] blockquote p{margin:.4rem 0}.post-body[data-astro-cid-4o3ag3md] blockquote p:first-child{margin-top:0}.post-body[data-astro-cid-4o3ag3md] blockquote p:last-child{margin-bottom:0}
+</style></head> <body data-astro-cid-37fxchfa> <header class="site-header has-progress" data-astro-cid-ctg3m53h> <div class="container header-grid" data-astro-cid-ctg3m53h> <div class="brand" data-astro-cid-ctg3m53h> <a href="/" data-astro-cid-ctg3m53h>shuaibird</a> </div> <nav id="primary-nav" class="nav" aria-label="Primary" data-astro-cid-ctg3m53h> <button class="nav-close" type="button" data-astro-cid-ctg3m53h>Close</button> <details class="menu active" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Tech</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/tech/every-bit-of-ai/" class="active" data-astro-cid-ctg3m53h> Every Bit of AI </a><a href="/tech/engineering/" data-astro-cid-ctg3m53h> Engineering </a> </div> </details> <details class="menu" data-astro-cid-ctg3m53h> <summary class="menu-trigger" data-astro-cid-ctg3m53h>Life</summary> <div class="menu-panel" data-astro-cid-ctg3m53h> <a href="/life/climbing/" data-astro-cid-ctg3m53h>Climbing</a> <a href="/life/music/" data-astro-cid-ctg3m53h>Music</a> </div> </details> <a href="/about/" data-astro-cid-ctg3m53h>About</a> <a href="/search/" data-astro-cid-ctg3m53h>Search</a> </nav> <div class="header-actions" data-astro-cid-ctg3m53h> <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-astro-cid-ctg3m53h>
+Menu
+</button> </div> </div> <div class="nav-backdrop" aria-hidden="true" data-astro-cid-ctg3m53h></div> <script>
+    // Ensure only one <details> dropdown is open at a time.
+    const menus = Array.from(
+      document.querySelectorAll(".site-header details.menu"),
+    );
+
+    for (const menu of menus) {
+      menu.addEventListener("toggle", () => {
+        if (!menu.open) return;
+        for (const other of menus) {
+          if (other !== menu) other.open = false;
+        }
+      });
+    }
+
+    const header = document.querySelector(".site-header");
+    const toggleButton = header?.querySelector(".nav-toggle");
+    const closeButton = header?.querySelector(".nav-close");
+    const backdrop = header?.querySelector(".nav-backdrop");
+
+    const setNavOpen = (open) => {
+      if (!header) return;
+      header.classList.toggle("nav-open", open);
+      if (toggleButton instanceof HTMLElement) {
+        toggleButton.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = open ? "hidden" : "";
+      document.body.style.paddingRight = open ? `${scrollbarWidth}px` : "";
+    };
+
+    toggleButton?.addEventListener("click", () => {
+      const isOpen = header?.classList.contains("nav-open");
+      setNavOpen(!isOpen);
+    });
+
+    closeButton?.addEventListener("click", () => setNavOpen(false));
+    backdrop?.addEventListener("click", () => setNavOpen(false));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      if (!header?.classList.contains("nav-open")) return;
+      setNavOpen(false);
+    });
+
+    // Close any open menu when selecting a dropdown item.
+    header?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const link = target.closest("a");
+      if (!link) return;
+
+      const inPanel = link.closest(".menu-panel");
+      if (inPanel) {
+        for (const menu of menus) menu.open = false;
+      }
+
+      setNavOpen(false);
+    });
+
+    const progressEnabled =
+      header instanceof HTMLElement &&
+      header.classList.contains("has-progress");
+
+    if (progressEnabled && header instanceof HTMLElement) {
+      let ticking = false;
+
+      const updateProgress = () => {
+        const doc = document.documentElement;
+        const scrollTop = window.scrollY || doc.scrollTop;
+        const maxScroll = doc.scrollHeight - window.innerHeight;
+        const progress =
+          maxScroll <= 0 ? 0 : Math.min(Math.max(scrollTop / maxScroll, 0), 1);
+
+        header.style.setProperty("--header-progress", progress.toFixed(4));
+        header.style.setProperty(
+          "--header-progress-percent",
+          `${(progress * 100).toFixed(2)}%`,
+        );
+        header.classList.toggle("progress-ready", maxScroll > 0);
+      };
+
+      const requestUpdate = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+      };
+
+      updateProgress();
+      window.addEventListener("scroll", requestUpdate, { passive: true });
+      window.addEventListener("resize", requestUpdate);
+      window.addEventListener("load", updateProgress);
+    }
+  </script>  </header> <main class="container" data-astro-cid-37fxchfa>  <section class="hero hero--solo" data-astro-cid-s5hxusys> <div class="hero__kicker" data-astro-cid-s5hxusys>Feb 28, 2026</div> <h1 class="hero__title" data-astro-cid-s5hxusys>RAG Works… Until Retrieval Fails</h1> <p class="hero__subtitle" data-astro-cid-s5hxusys>A simple explanation of how RAG works, why retrieval is the real bottleneck, and how to measure it with MRR, nDCG, Recall@K and Precision@K.</p> </section>  <section class="section-card" data-astro-cid-jt2j4m2k>  <div class="section-body" data-astro-cid-jt2j4m2k>  <div class="post-body" data-pagefind-body data-astro-cid-4o3ag3md> <h2 id="why-rag-matters">Why RAG Matters</h2>
+<p>RAG (Retrieval-Augmented Generation) has become a common pattern in many AI products.</p>
+<p>It powers chat over documents.
+It powers internal knowledge bots.
+It powers most “AI over your data” products.</p>
+<p>But here’s the truth:</p>
+<blockquote>
+<p>RAG works… until retrieval fails.</p>
+</blockquote>
+<p>Let’s break it down clearly.</p>
+<hr>
+<h2 id="how-rag-actually-works">How RAG Actually Works</h2>
+<p>RAG sounds complex, but the idea is simple:</p>
+<blockquote>
+<p>Find relevant context → give it to the LLM → let it answer.</p>
+</blockquote>
+<p>The pipeline looks like this:</p>
+<div class="mermaid-responsive"><div class="mermaid-responsive__item mermaid-responsive__item--lr"><div class="mermaid"><svg id="mermaid-0" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 1359.453125px;" viewBox="0 0 1359.453125 70" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-0{font-family:arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-0 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-0 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-0 .error-icon{fill:#552222;}#mermaid-0 .error-text{fill:#552222;stroke:#552222;}#mermaid-0 .edge-thickness-normal{stroke-width:1px;}#mermaid-0 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-0 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-0 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-0 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-0 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-0 .marker{fill:#000000;stroke:#000000;}#mermaid-0 .marker.cross{stroke:#000000;}#mermaid-0 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-0 p{margin:0;}#mermaid-0 .label{font-family:arial,sans-serif;color:#000000;}#mermaid-0 .cluster-label text{fill:#333;}#mermaid-0 .cluster-label span{color:#333;}#mermaid-0 .cluster-label span p{background-color:transparent;}#mermaid-0 .label text,#mermaid-0 span{fill:#000000;color:#000000;}#mermaid-0 .node rect,#mermaid-0 .node circle,#mermaid-0 .node ellipse,#mermaid-0 .node polygon,#mermaid-0 .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}#mermaid-0 .rough-node .label text,#mermaid-0 .node .label text,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-anchor:middle;}#mermaid-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-0 .rough-node .label,#mermaid-0 .node .label,#mermaid-0 .image-shape .label,#mermaid-0 .icon-shape .label{text-align:center;}#mermaid-0 .node.clickable{cursor:pointer;}#mermaid-0 .root .anchor path{fill:#000000!important;stroke-width:0;stroke:#000000;}#mermaid-0 .arrowheadPath{fill:green;}#mermaid-0 .edgePath .path{stroke:#000000;stroke-width:2.0px;}#mermaid-0 .flowchart-link{stroke:#000000;fill:none;}#mermaid-0 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-0 .edgeLabel p{background-color:#e8e8e8;}#mermaid-0 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-0 .cluster rect{fill:#cdffb2;stroke:#6eaa49;stroke-width:1px;}#mermaid-0 .cluster text{fill:#333;}#mermaid-0 .cluster span{color:#333;}#mermaid-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(78.1578947368, 58.4615384615%, 84.5098039216%);border:1px solid #6eaa49;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-0 rect.text{fill:none;stroke-width:0;}#mermaid-0 .icon-shape,#mermaid-0 .image-shape{background-color:#e8e8e8;text-align:center;}#mermaid-0 .icon-shape p,#mermaid-0 .image-shape p{background-color:#e8e8e8;padding:2px;}#mermaid-0 .icon-shape rect,#mermaid-0 .image-shape rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-0 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-0 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-0 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker id="mermaid-0_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-0_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-0_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M132.047,35L136.214,35C140.38,35,148.714,35,156.38,35C164.047,35,171.047,35,174.547,35L178.047,35" id="L_A_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6MTMyLjA0Njg3NSwieSI6MzV9LHsieCI6MTU3LjA0Njg3NSwieSI6MzV9LHsieCI6MTgyLjA0Njg3NSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M371.016,35L375.182,35C379.349,35,387.682,35,395.349,35C403.016,35,410.016,35,413.516,35L417.016,35" id="L_B_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_C_0" data-points="W3sieCI6MzcxLjAxNTYyNSwieSI6MzV9LHsieCI6Mzk2LjAxNTYyNSwieSI6MzV9LHsieCI6NDIxLjAxNTYyNSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M581.516,35L585.682,35C589.849,35,598.182,35,605.849,35C613.516,35,620.516,35,624.016,35L627.516,35" id="L_C_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_D_0" data-points="W3sieCI6NTgxLjUxNTYyNSwieSI6MzV9LHsieCI6NjA2LjUxNTYyNSwieSI6MzV9LHsieCI6NjMxLjUxNTYyNSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M791.125,35L795.292,35C799.458,35,807.792,35,815.458,35C823.125,35,830.125,35,833.625,35L837.125,35" id="L_D_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_E_0" data-points="W3sieCI6NzkxLjEyNSwieSI6MzV9LHsieCI6ODE2LjEyNSwieSI6MzV9LHsieCI6ODQxLjEyNSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M1046.969,35L1051.135,35C1055.302,35,1063.635,35,1071.302,35C1078.969,35,1085.969,35,1089.469,35L1092.969,35" id="L_E_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_F_0" data-points="W3sieCI6MTA0Ni45Njg3NSwieSI6MzV9LHsieCI6MTA3MS45Njg3NSwieSI6MzV9LHsieCI6MTA5Ni45Njg3NSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path><path d="M1188.094,35L1192.26,35C1196.427,35,1204.76,35,1212.427,35C1220.094,35,1227.094,35,1230.594,35L1234.094,35" id="L_F_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_G_0" data-points="W3sieCI6MTE4OC4wOTM3NSwieSI6MzV9LHsieCI6MTIxMy4wOTM3NSwieSI6MzV9LHsieCI6MTIzOC4wOTM3NSwieSI6MzV9XQ==" marker-end="url(#mermaid-0_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_D_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_E_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_F_G_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-A-0" transform="translate(70.0234375, 35)"><rect class="basic label-container" style="" x="-62.0234375" y="-27" width="124.046875" height="54"></rect><g class="label" style="" transform="translate(-32.0234375, -12)"><rect></rect><foreignObject width="64.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Question</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-B-1" transform="translate(276.53125, 35)"><rect class="basic label-container" style="" x="-94.484375" y="-27" width="188.96875" height="54"></rect><g class="label" style="" transform="translate(-64.484375, -12)"><rect></rect><foreignObject width="128.96875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Embedding Model</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-C-2" transform="translate(501.265625, 35)"><rect class="basic label-container" style="" x="-80.25" y="-27" width="160.5" height="54"></rect><g class="label" style="" transform="translate(-50.25, -12)"><rect></rect><foreignObject width="100.5" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Vector Search</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-D-3" transform="translate(711.3203125, 35)"><rect class="basic label-container" style="" x="-79.8046875" y="-27" width="159.609375" height="54"></rect><g class="label" style="" transform="translate(-49.8046875, -12)"><rect></rect><foreignObject width="99.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Top K Chunks</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-E-4" transform="translate(944.046875, 35)"><rect class="basic label-container" style="" x="-102.921875" y="-27" width="205.84375" height="54"></rect><g class="label" style="" transform="translate(-72.921875, -12)"><rect></rect><foreignObject width="145.84375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Prompt Construction</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-F-5" transform="translate(1142.53125, 35)"><rect class="basic label-container" style="" x="-45.5625" y="-27" width="91.125" height="54"></rect><g class="label" style="" transform="translate(-15.5625, -12)"><rect></rect><foreignObject width="31.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>LLM</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-G-6" transform="translate(1294.7734375, 35)"><rect class="basic label-container" style="" x="-56.6796875" y="-27" width="113.359375" height="54"></rect><g class="label" style="" transform="translate(-26.6796875, -12)"><rect></rect><foreignObject width="53.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Answer</p></span></div></foreignObject></g></g></g></g></g></svg></div></div><div class="mermaid-responsive__item mermaid-responsive__item--tb"><div class="mermaid"><svg id="mermaid-1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 221.84375px;" viewBox="0 0 221.84375 694" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1{font-family:arial,sans-serif;font-size:16px;fill:#000000;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#mermaid-1 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#mermaid-1 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#mermaid-1 .error-icon{fill:#552222;}#mermaid-1 .error-text{fill:#552222;stroke:#552222;}#mermaid-1 .edge-thickness-normal{stroke-width:1px;}#mermaid-1 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1 .marker{fill:#000000;stroke:#000000;}#mermaid-1 .marker.cross{stroke:#000000;}#mermaid-1 svg{font-family:arial,sans-serif;font-size:16px;}#mermaid-1 p{margin:0;}#mermaid-1 .label{font-family:arial,sans-serif;color:#000000;}#mermaid-1 .cluster-label text{fill:#333;}#mermaid-1 .cluster-label span{color:#333;}#mermaid-1 .cluster-label span p{background-color:transparent;}#mermaid-1 .label text,#mermaid-1 span{fill:#000000;color:#000000;}#mermaid-1 .node rect,#mermaid-1 .node circle,#mermaid-1 .node ellipse,#mermaid-1 .node polygon,#mermaid-1 .node path{fill:#cde498;stroke:#13540c;stroke-width:1px;}#mermaid-1 .rough-node .label text,#mermaid-1 .node .label text,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-anchor:middle;}#mermaid-1 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1 .rough-node .label,#mermaid-1 .node .label,#mermaid-1 .image-shape .label,#mermaid-1 .icon-shape .label{text-align:center;}#mermaid-1 .node.clickable{cursor:pointer;}#mermaid-1 .root .anchor path{fill:#000000!important;stroke-width:0;stroke:#000000;}#mermaid-1 .arrowheadPath{fill:green;}#mermaid-1 .edgePath .path{stroke:#000000;stroke-width:2.0px;}#mermaid-1 .flowchart-link{stroke:#000000;fill:none;}#mermaid-1 .edgeLabel{background-color:#e8e8e8;text-align:center;}#mermaid-1 .edgeLabel p{background-color:#e8e8e8;}#mermaid-1 .edgeLabel rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-1 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#mermaid-1 .cluster rect{fill:#cdffb2;stroke:#6eaa49;stroke-width:1px;}#mermaid-1 .cluster text{fill:#333;}#mermaid-1 .cluster span{color:#333;}#mermaid-1 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:arial,sans-serif;font-size:12px;background:hsl(78.1578947368, 58.4615384615%, 84.5098039216%);border:1px solid #6eaa49;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1 rect.text{fill:none;stroke-width:0;}#mermaid-1 .icon-shape,#mermaid-1 .image-shape{background-color:#e8e8e8;text-align:center;}#mermaid-1 .icon-shape p,#mermaid-1 .image-shape p{background-color:#e8e8e8;padding:2px;}#mermaid-1 .icon-shape rect,#mermaid-1 .image-shape rect{opacity:0.5;background-color:#e8e8e8;fill:#e8e8e8;}#mermaid-1 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#mermaid-1 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#mermaid-1 :root{--mermaid-font-family:arial,sans-serif;}</style><g><marker id="mermaid-1_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M110.922,62L110.922,66.167C110.922,70.333,110.922,78.667,110.922,86.333C110.922,94,110.922,101,110.922,104.5L110.922,108" id="L_A_B_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6NjJ9LHsieCI6MTEwLjkyMTg3NSwieSI6ODd9LHsieCI6MTEwLjkyMTg3NSwieSI6MTEyfV0=" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M110.922,166L110.922,170.167C110.922,174.333,110.922,182.667,110.922,190.333C110.922,198,110.922,205,110.922,208.5L110.922,212" id="L_B_C_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_C_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6MTY2fSx7IngiOjExMC45MjE4NzUsInkiOjE5MX0seyJ4IjoxMTAuOTIxODc1LCJ5IjoyMTZ9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M110.922,270L110.922,274.167C110.922,278.333,110.922,286.667,110.922,294.333C110.922,302,110.922,309,110.922,312.5L110.922,316" id="L_C_D_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_D_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6MjcwfSx7IngiOjExMC45MjE4NzUsInkiOjI5NX0seyJ4IjoxMTAuOTIxODc1LCJ5IjozMjB9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M110.922,374L110.922,378.167C110.922,382.333,110.922,390.667,110.922,398.333C110.922,406,110.922,413,110.922,416.5L110.922,420" id="L_D_E_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_E_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6Mzc0fSx7IngiOjExMC45MjE4NzUsInkiOjM5OX0seyJ4IjoxMTAuOTIxODc1LCJ5Ijo0MjR9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M110.922,478L110.922,482.167C110.922,486.333,110.922,494.667,110.922,502.333C110.922,510,110.922,517,110.922,520.5L110.922,524" id="L_E_F_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_E_F_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6NDc4fSx7IngiOjExMC45MjE4NzUsInkiOjUwM30seyJ4IjoxMTAuOTIxODc1LCJ5Ijo1Mjh9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path><path d="M110.922,582L110.922,586.167C110.922,590.333,110.922,598.667,110.922,606.333C110.922,614,110.922,621,110.922,624.5L110.922,628" id="L_F_G_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_F_G_0" data-points="W3sieCI6MTEwLjkyMTg3NSwieSI6NTgyfSx7IngiOjExMC45MjE4NzUsInkiOjYwN30seyJ4IjoxMTAuOTIxODc1LCJ5Ijo2MzJ9XQ==" marker-end="url(#mermaid-1_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_D_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_D_E_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_E_F_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_F_G_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-A-0" transform="translate(110.921875, 35)"><rect class="basic label-container" style="" x="-62.0234375" y="-27" width="124.046875" height="54"></rect><g class="label" style="" transform="translate(-32.0234375, -12)"><rect></rect><foreignObject width="64.046875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Question</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-B-1" transform="translate(110.921875, 139)"><rect class="basic label-container" style="" x="-94.484375" y="-27" width="188.96875" height="54"></rect><g class="label" style="" transform="translate(-64.484375, -12)"><rect></rect><foreignObject width="128.96875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Embedding Model</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-C-2" transform="translate(110.921875, 243)"><rect class="basic label-container" style="" x="-80.25" y="-27" width="160.5" height="54"></rect><g class="label" style="" transform="translate(-50.25, -12)"><rect></rect><foreignObject width="100.5" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Vector Search</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-D-3" transform="translate(110.921875, 347)"><rect class="basic label-container" style="" x="-79.8046875" y="-27" width="159.609375" height="54"></rect><g class="label" style="" transform="translate(-49.8046875, -12)"><rect></rect><foreignObject width="99.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Top K Chunks</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-E-4" transform="translate(110.921875, 451)"><rect class="basic label-container" style="" x="-102.921875" y="-27" width="205.84375" height="54"></rect><g class="label" style="" transform="translate(-72.921875, -12)"><rect></rect><foreignObject width="145.84375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Prompt Construction</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-F-5" transform="translate(110.921875, 555)"><rect class="basic label-container" style="" x="-45.5625" y="-27" width="91.125" height="54"></rect><g class="label" style="" transform="translate(-15.5625, -12)"><rect></rect><foreignObject width="31.125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>LLM</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-G-6" transform="translate(110.921875, 659)"><rect class="basic label-container" style="" x="-56.6796875" y="-27" width="113.359375" height="54"></rect><g class="label" style="" transform="translate(-26.6796875, -12)"><rect></rect><foreignObject width="53.359375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Answer</p></span></div></foreignObject></g></g></g></g></g></svg></div></div></div>
+<h3 id="1-user-asks-a-question">1) User asks a question</h3>
+<p>Your system receives a question like:</p>
+<blockquote>
+<p>“Who is the CEO of the company Y?”</p>
+</blockquote>
+<h3 id="2-convert-question-into-a-vector">2) Convert question into a vector</h3>
+<p>An embedding model turns the question into numbers (a vector).</p>
+<p>Why?</p>
+<p>Because we can compare vectors mathematically.</p>
+<h3 id="3-search-the-vector-database">3) Search the vector database</h3>
+<p>You compare the question vector to stored document chunk vectors.</p>
+<p>You retrieve the <strong>top K most similar chunks</strong>.</p>
+<h3 id="4-build-the-prompt">4) Build the prompt</h3>
+<p>You create a prompt that includes:</p>
+<ul>
+<li>The retrieved chunks</li>
+<li>The user question</li>
+</ul>
+<h3 id="5-llm-generates-the-answer">5) LLM generates the answer</h3>
+<p>The LLM reads the context and produces the final answer.</p>
+<hr>
+<h2 id="why-rag-is-kind-of-a-hack">Why RAG Is Kind of a Hack</h2>
+<p>LLMs don’t actually “know” your documents.</p>
+<p>So we:</p>
+<ul>
+<li>store chunks outside the model</li>
+<li>retrieve them at runtime</li>
+<li>inject them into the prompt</li>
+</ul>
+<p>We hope:</p>
+<ul>
+<li>the right chunk is retrieved</li>
+<li>it appears high enough</li>
+<li>it fits in the context window</li>
+<li>the model uses it properly</li>
+</ul>
+<p>If retrieval fails:</p>
+<ul>
+<li>Wrong chunk retrieved → hallucination</li>
+<li>Right chunk ranked too low → ignored</li>
+<li>Missing chunk → incomplete answer</li>
+</ul>
+<p>And here’s the key:</p>
+<blockquote>
+<p>If the right context is not retrieved, the LLM cannot save you.</p>
+</blockquote>
+<p>This is why retrieval evaluation matters.</p>
+<hr>
+<h2 id="why-we-must-evaluate-retrieval-separately">Why We Must Evaluate Retrieval Separately</h2>
+<p>There are two different problems in a RAG system:</p>
+<ul>
+<li>Retrieval quality</li>
+<li>LLM reasoning quality</li>
+</ul>
+<p>Do not mix them.</p>
+<p>If the final answer is wrong, you need to know:</p>
+<ul>
+<li>Did retrieval fail?</li>
+<li>Or did the model fail to reason correctly over good context?</li>
+</ul>
+<p>In practice, once a reasonably strong LLM is in place, most performance differences in RAG systems come from retrieval quality.</p>
+<p>This is also where RAG engineering is most practical to iterate. Instead of evaluating only the final answer, we can experiment directly on retrieval — adjusting chunking strategies, embedding models, or top-K logic — and measure their impact in isolation.</p>
+<p>Retrieval experiments are cheaper, faster to run, and give clearer signals about where the system is failing.</p>
+<p>So we measure retrieval directly.</p>
+<p>That’s where retrieval metrics come in.</p>
+<hr>
+<h2 id="retrieval-metrics">Retrieval Metrics</h2>
+<p>These metrics don’t measure language quality.</p>
+<p>They measure ranking quality.</p>
+<p>They answer:</p>
+<blockquote>
+<p>“Did the retriever put the right chunks near the top?”</p>
+</blockquote>
+<h3 id="mrr--mean-reciprocal-rank">MRR — Mean Reciprocal Rank</h3>
+<p>MRR looks at:</p>
+<blockquote>
+<p>Where was the first relevant chunk?</p>
+</blockquote>
+<p>If the first relevant chunk is:</p>
+<ul>
+<li>Rank 1 → score = 1/1 = 1.0</li>
+<li>Rank 2 → score = 1/2 = 0.5</li>
+<li>Rank 3 → score = 1/3 = 0.33</li>
+</ul>
+<p>Higher is better.</p>
+<p>MRR focuses only on the <strong>first correct hit</strong>.</p>
+<p>Good when:</p>
+<ul>
+<li>One chunk is enough to answer the question.</li>
+</ul>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> reciprocal_rank</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">relevance</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#BB9AF7">    for</span><span style="color:#A9B1D6"> i</span><span style="color:#89DDFF">,</span><span style="color:#A9B1D6"> rel </span><span style="color:#BB9AF7">in</span><span style="color:#0DB9D7"> enumerate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">relevance</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> start</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">)</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#BB9AF7">        if</span><span style="color:#A9B1D6"> rel</span><span style="color:#89DDFF">:</span></span>
+<span class="line"><span style="color:#BB9AF7">            return</span><span style="color:#FF9E64"> 1</span><span style="color:#89DDFF"> /</span><span style="color:#A9B1D6"> i</span></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#FF9E64"> 0</span></span></code></pre>
+<h3 id="ndcg--normalized-discounted-cumulative-gain">nDCG — Normalized Discounted Cumulative Gain</h3>
+<p>nDCG asks:</p>
+<blockquote>
+<p>Did relevant chunks rank higher than irrelevant ones?</p>
+</blockquote>
+<p>It rewards:</p>
+<ul>
+<li>Relevant chunks appearing early</li>
+<li>Multiple relevant chunks appearing near the top</li>
+</ul>
+<p>It is more flexible than MRR.</p>
+<p>Good when:</p>
+<ul>
+<li>Multiple chunks are needed to answer correctly.</li>
+</ul>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#7DCFFF">import</span><span style="color:#A9B1D6"> math</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> ndcg_at_k</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">relevance</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> k</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#A9B1D6">    dcg </span><span style="color:#89DDFF">=</span><span style="color:#0DB9D7"> sum</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">rel </span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5"> math</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">log2</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">i </span><span style="color:#89DDFF">+</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#BB9AF7">              for</span><span style="color:#C0CAF5"> i</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> rel </span><span style="color:#BB9AF7">in</span><span style="color:#0DB9D7"> enumerate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">relevance</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5">k</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> start</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">))</span></span>
+<span class="line"><span style="color:#A9B1D6">    ideal </span><span style="color:#89DDFF">=</span><span style="color:#0DB9D7"> sorted</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">relevance</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5">k</span><span style="color:#9ABDF5">]</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> reverse</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">True</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#A9B1D6">    idcg </span><span style="color:#89DDFF">=</span><span style="color:#0DB9D7"> sum</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">rel </span><span style="color:#89DDFF">/</span><span style="color:#C0CAF5"> math</span><span style="color:#89DDFF">.</span><span style="color:#7AA2F7">log2</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">i </span><span style="color:#89DDFF">+</span><span style="color:#FF9E64"> 1</span><span style="color:#9ABDF5">)</span></span>
+<span class="line"><span style="color:#BB9AF7">               for</span><span style="color:#C0CAF5"> i</span><span style="color:#89DDFF">,</span><span style="color:#C0CAF5"> rel </span><span style="color:#BB9AF7">in</span><span style="color:#0DB9D7"> enumerate</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">ideal</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> start</span><span style="color:#89DDFF">=</span><span style="color:#FF9E64">1</span><span style="color:#9ABDF5">))</span></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#A9B1D6"> dcg </span><span style="color:#89DDFF">/</span><span style="color:#A9B1D6"> idcg </span><span style="color:#BB9AF7">if</span><span style="color:#A9B1D6"> idcg </span><span style="color:#BB9AF7">></span><span style="color:#FF9E64"> 0</span><span style="color:#BB9AF7"> else</span><span style="color:#FF9E64"> 0</span></span></code></pre>
+<h3 id="recallk">Recall@K</h3>
+<p>Recall@K asks:</p>
+<blockquote>
+<p>Was the relevant chunk inside the top K?</p>
+</blockquote>
+<p>Example (K = 5):</p>
+<ul>
+<li>If the correct chunk is in top 5 → success</li>
+<li>If it’s at rank 6 → failure</li>
+</ul>
+<p>This measures <strong>coverage</strong>.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“Did we retrieve it at all?”</p>
+</blockquote>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> recall_at_k</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">relevance</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> k</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> total_relevant</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#0DB9D7"> sum</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">relevance</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5">k</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF"> /</span><span style="color:#A9B1D6"> total_relevant </span><span style="color:#BB9AF7">if</span><span style="color:#A9B1D6"> total_relevant </span><span style="color:#BB9AF7">else</span><span style="color:#FF9E64"> 0</span></span></code></pre>
+<h3 id="precisionk">Precision@K</h3>
+<p>Precision@K asks:</p>
+<blockquote>
+<p>Among the top K chunks, how many were actually relevant?</p>
+</blockquote>
+<p>If top 5 contains:</p>
+<ul>
+<li>4 relevant chunks → precision = 0.8</li>
+<li>1 relevant chunk → precision = 0.2</li>
+</ul>
+<p>This measures <strong>noise level</strong>.</p>
+<p>It answers:</p>
+<blockquote>
+<p>“Are we retrieving too much irrelevant stuff?”</p>
+</blockquote>
+<pre class="astro-code tokyo-night" style="background-color:#1a1b26;color:#a9b1d6; overflow-x: auto;" tabindex="0" data-language="python"><code><span class="line"><span style="color:#BB9AF7">def</span><span style="color:#7AA2F7"> precision_at_k</span><span style="color:#9ABDF5">(</span><span style="color:#E0AF68">relevance</span><span style="color:#89DDFF">,</span><span style="color:#E0AF68"> k</span><span style="color:#9ABDF5">):</span></span>
+<span class="line"><span style="color:#BB9AF7">    return</span><span style="color:#0DB9D7"> sum</span><span style="color:#9ABDF5">(</span><span style="color:#C0CAF5">relevance</span><span style="color:#9ABDF5">[</span><span style="color:#89DDFF">:</span><span style="color:#C0CAF5">k</span><span style="color:#9ABDF5">])</span><span style="color:#89DDFF"> /</span><span style="color:#A9B1D6"> k </span><span style="color:#BB9AF7">if</span><span style="color:#A9B1D6"> k </span><span style="color:#BB9AF7">else</span><span style="color:#FF9E64"> 0</span></span></code></pre>
+<hr>
+<h2 id="what-kind-of-questions-do-these-metrics-optimize">What Kind of Questions Do These Metrics Optimize?</h2>
+<p>These ranking metrics (MRR, nDCG, Recall@K, Precision@K) are designed for questions where:</p>
+<ul>
+<li>The answer exists in specific chunks.</li>
+<li>Retrieval must surface those chunks.</li>
+<li>The LLM mainly summarizes or combines them.</li>
+</ul>
+<p>In other words, they optimize for <strong>chunk-level relevance</strong>.</p>
+<p>Examples:</p>
+<ul>
+<li>“How many contracts has X signed?”</li>
+<li>“List all features mentioned in section 4.”</li>
+<li>“What requirements are stated in the policy document?”</li>
+</ul>
+<p>In these cases, if the correct chunks are not retrieved, the answer will fail.</p>
+<hr>
+<h2 id="what-about-holistic-questions">What About Holistic Questions?</h2>
+<p>Holistic questions are different.</p>
+<p>They require broader coverage, not just one or two highly ranked chunks.</p>
+<p>For example:</p>
+<ul>
+<li>“How many contracts has Alice signed?”</li>
+</ul>
+<p>If your vector database stores hundreds of contracts, and you want to count how many were signed by a specific person, retrieving just the top 5 similar chunks is not enough. You may need to retrieve <em>all</em> matching contracts, not just the most similar ones.</p>
+<p>This is no longer a simple top-K similarity problem. It becomes a coverage or filtering problem.</p>
+<p>For tasks like this, what matters is whether the final answer is correct and complete.</p>
+<p>Ranking metrics such as MRR or Recall@K are not enough here, because they mainly evaluate whether relevant chunks appear near the top — not whether all necessary information was retrieved.</p>
+<hr>
+<h2 id="the-real-lesson">The Real Lesson</h2>
+<p>RAG is not about prompt tricks.</p>
+<p>It’s about:</p>
+<ul>
+<li>Chunking strategy</li>
+<li>Embedding quality</li>
+<li>Ranking quality</li>
+<li>Evaluation discipline</li>
+</ul>
+<p>If retrieval is weak:</p>
+<ul>
+<li>You can’t fix it with a better prompt.</li>
+<li>You can’t fix it with temperature.</li>
+<li>You can’t fix it with chain-of-thought.</li>
+</ul>
+<p>RAG works…</p>
+<p>Until retrieval fails.</p>
+<p>And that’s why evaluation is everything.</p> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> rag retrieval embeddings chunking ranking mrr ndcg recall precision vectordatabase hallucination retrieval augmented generation retrieval evaluation metrics mean reciprocal rank normalized discounted cumulative gain recall at k precision at k </div> <div class="sr-only" aria-hidden="true" data-astro-cid-4o3ag3md> <span data-pagefind-meta="series" data-astro-cid-4o3ag3md>Every Bit of AI</span> <span data-pagefind-meta="collection" data-astro-cid-4o3ag3md>every-bit-of-ai</span> <span data-pagefind-meta="summary" data-astro-cid-4o3ag3md>Explains the rag pipeline, why retrieval is the bottleneck, and how to evaluate ranking quality with mrr, ndcg, recall@k, and precision@k.</span> <span data-pagefind-meta="keywords" data-astro-cid-4o3ag3md> rag retrieval embeddings chunking ranking mrr ndcg recall precision vectordatabase hallucination </span> <span data-pagefind-meta="phrases" data-astro-cid-4o3ag3md> retrieval augmented generation retrieval evaluation metrics mean reciprocal rank normalized discounted cumulative gain recall at k precision at k </span> </div> </div>  </div> </section>    </main>   </body> </html>

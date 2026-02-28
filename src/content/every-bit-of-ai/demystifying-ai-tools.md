@@ -119,21 +119,21 @@ Below is a minimal demo showing how tool calling works using a shopping-price ex
   .demo-iframe {
     width: 100%;
     border: 0;
-    height: 850px;
+    height: 860px;
   }
   @media (max-width: 643px) {
     .demo-iframe {
-      height: 990px;
+      height: 1000px;
     }
   }
   @media (max-width: 488px) {
     .demo-iframe {
-      height: 1040px;
+      height: 1050px;
     }
   }
   @media (max-width: 473px) {
     .demo-iframe {
-      height: 1150px;
+      height: 1160px;
     }
   }
 </style>

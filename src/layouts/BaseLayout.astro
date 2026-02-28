@@ -145,6 +145,12 @@ const isDev = import.meta.env.DEV;
         color: var(--color-text);
       }
 
+      :global(.astro-code::selection),
+      :global(.astro-code *::selection) {
+        background: rgba(81, 92, 126, 0.45);
+        color: #c0caf5;
+      }
+
       :global(.sr-only) {
         position: absolute;
         width: 1px;

@@ -1,0 +1,35 @@
+{
+  "collection": "every-bit-of-ai",
+  "slug": "rag-retrieval-evaluation",
+  "title": "RAG Works… Until Retrieval Fails",
+  "description": "A simple explanation of how RAG works, why retrieval is the real bottleneck, and how to measure it with MRR, nDCG, Recall@K and Precision@K.",
+  "keywords": [
+    "rag",
+    "retrieval",
+    "embeddings",
+    "chunking",
+    "ranking",
+    "mrr",
+    "ndcg",
+    "recall",
+    "precision",
+    "vectordatabase",
+    "hallucination"
+  ],
+  "phrases": [
+    "retrieval augmented generation",
+    "retrieval evaluation metrics",
+    "mean reciprocal rank",
+    "normalized discounted cumulative gain",
+    "recall at k",
+    "precision at k"
+  ],
+  "summary": "Explains the rag pipeline, why retrieval is the bottleneck, and how to evaluate ranking quality with mrr, ndcg, recall@k, and precision@k.",
+  "contentHash": "19185dd5f0f7b1b1486e33237a731089e3def2077ec352964220c916206dbb2b",
+  "updatedAt": "2026-02-28T08:22:58.306Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}

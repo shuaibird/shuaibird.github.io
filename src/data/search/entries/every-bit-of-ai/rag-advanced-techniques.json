@@ -1,0 +1,35 @@
+{
+  "collection": "every-bit-of-ai",
+  "slug": "rag-advanced-techniques",
+  "title": "RAG Advanced Techniques",
+  "description": "A practical reference list of modern RAG techniques—chunking, embeddings, query rewrite/expansion, reranking, hierarchical/graph/agentic RAG—with concrete examples and tradeoffs.",
+  "keywords": [
+    "rag",
+    "chunking",
+    "embeddings",
+    "retrieval",
+    "reranking",
+    "preprocessing",
+    "evaluation",
+    "hierarchical",
+    "graph",
+    "agentic",
+    "prompting"
+  ],
+  "phrases": [
+    "advanced rag techniques",
+    "query rewriting and expansion",
+    "cross encoder reranking",
+    "hierarchical retrieval pipeline",
+    "graph based retrieval",
+    "retrieval engineering tradeoffs"
+  ],
+  "summary": "Practical guide to advanced rag methods across retrieval, architecture, and generation layers, covering chunking, embeddings, query control, reranking, and hierarchical/graph/agentic designs.",
+  "contentHash": "d5291f2a75dddbf537bf80f63cdad2464ff0f0b695cd4a2d9666672f9a71322d",
+  "updatedAt": "2026-03-01T09:11:18.100Z",
+  "source": "llm",
+  "llm": {
+    "provider": "openai-compatible",
+    "model": "gpt-5.2"
+  }
+}
